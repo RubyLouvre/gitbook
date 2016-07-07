@@ -4,8 +4,7 @@
         "betterchinese",
         "page-toc",
         "splitter",
-         "-search",
-         "search-pro",
+         
          "advanced-emoji",
          "github" ,
          "emphasize",
@@ -17,10 +16,7 @@
         "layout":{
            "headerPath" : "layouts/header.html"
          },
-         "search-pro": {
-            "cutWordLib": "nodejieba",
-            "defineWord" : ["Gitbook Use"]
-        },
+       
         "github": {
            "url": "https://github.com/rubylouver"
         },
