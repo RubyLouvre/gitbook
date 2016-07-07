@@ -7,3 +7,4 @@
    * [ms-if](directives/ms-if.md)
    * [ms-css](directives/ms-css.md)
    * [ms-text](directives/ms-text.md)
+   * [ms-html](directives/ms-html.md)
