@@ -1,7 +1,8 @@
 {
     "plugins": [
         "header",
-        "betterchinese"
+        "betterchinese",
+        "page-toc"
     ],
     "pluginsConfig": {
         "layout": {
