@@ -1,7 +1,7 @@
 # Summary
 
-* [Introduction](README.md)
-* [主页](home.md)
+
+* [介绍](home.md)
 * [指令](directive.md)
    * [ms-attr](directives/ms-attr.md)
    * [ms-if](directives/ms-if.md)
@@ -25,6 +25,5 @@
 * [组件](component.md)
 * [过滤器](filter.md)
 * [类型转换器](duplex-parser.md)
-   * 表单验证
 * [表单验证](duplex-validate.md)
 
