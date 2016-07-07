@@ -4,5 +4,9 @@
         "betterchinese",
         "toc-for-3"
     ],
-    "pluginsConfig": {}
+    "pluginsConfig": {
+        "layout":{
+           "headerPath" : "layouts/header.html"
+        }
+    }
 }
