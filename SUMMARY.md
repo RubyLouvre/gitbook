@@ -24,5 +24,5 @@
    * [自定义标签](custom-tag.md)
 * [组件](component.md)
 * [过滤器](filter.md)
-* 类型转换器
+* [类型转换器](duplex-parser.md)
 
