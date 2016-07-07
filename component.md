@@ -59,11 +59,159 @@ xmp, wbr, template
 ```
 
 ##配置对象
+除了ms-开头的自定义标签不需要指定{% em color="#ff0000" %}ms-widget配置对象{% endem %}外,其他三种标签都需要指定ms-widget配置对象，并且这个配置对象里必须有is配置项，其值为要生成的组件名。
+
+avalon2 的默认配置项比avalon1.5 少许多。所有组件通用的配置项
+
+* is, 字符串, 指定组件的类型。如果你使用了自定义标签，这个还可以省去。
+
+
+* $id, 字符串, 指定组件vm的$id，这是可选项。如果该组件是位于SPA的子页里面，也请务必指定此配置项，能大大提高性能。
+
+* define, 函数, 自己决定如何创建vm，这是可选项。
+
+* onInit, onReady, onViewChange, onDispose四大生命周期钩子。
+
+其他组件需要传入的属性与方法，也可以写配置对象中。为了方便传数据，ms-widget也像ms-class那样能对应一个数组。
+
+```html
+<wbr ms-widget="[@allConfig, {$id: 'xxx_'+$index}]"/>
+```
+
+> 此外,  如果你的组件是位于SPA的子页面中，或是由ms-html动态生成。但组件对应的真实节点被移出DOM树时，该组件会被销毁。为了进一步提高性能，你可以在组件容器中定义一个cached属性，其值为true，它就能常驻内存。
+
+```html
+<wbr cached="true" ms-widget="[@allConfig, {$id: 'xxx_'+$index}]"/>
+```
+
+> 用了cached时，必须指定$id配置项。
 
 ##插槽元素
 
+为了方便传入很长的HTML格式的参数，web components规范发明了slot插槽元素。avalon使用了一些黑魔法也让旧式IE浏览器支持它。
+
+我们先来看一下不使用插槽元素如何传入大片内容。比如说，我们有这么一个组件：
+```javascript
+avalon.component('ms-span',{
+    template:"<span>{{@content}}</span>",
+    defaults: {
+       content: ""
+    }
+})
+```
+
+那么外面使用时, 是这样传参的”
+
+```html
+<div ms-controller='test'>
+<ms-span ms-widget="{content:@aaa}"></ms-span>
+</div>
+```
+页面主VM中添加aaa属性：
+```javascript
+avalon.define({
+   $id: "test",
+   aaa: "ms-span的内容,传入进其innerHTML"
+})
+```
+但这样只生成文本,我们要传入复杂的结构,则需要修改组件的模板:
+```javascript
+avalon.component('ms-span',{
+    template:"<span ms-html="@content"></span>",
+    defaults: {
+       content: ""
+    }
+})
+```
+那么我们在VM中将aaa的值变成一个HTML文本就行了.如果这个组件非常复杂, 里面有三处要传入内容的地方:
+```javascript
+avalon.component('ms-span',{
+template:'<div class="com"><div ms-html="@content1"></div>'+
+    '<div ms-html="@content2"></div>'+
+    '<div ms-html="@content3"></div><div>',
+    defaults: {
+       content1: "",
+       content2: "",
+       content3: ""
+    }
+})
+```
+那么我们就得在外面的vm中添加三个属性, 在JS中写长长的HTML……显然这是非常不方便编写与维护。从阅读代码的角度来看，这样的属性，其实放在HTML页面上会更好。本来JS就应该与JS呆在一起，而HTML也应该与HTML在一块。插槽元素的出现，为我们解决这难题。
+
+
+slot元素拥有一个可选的name属性，并且允许多个slot元素拥有同一个name值。
+
+根据DOM4规模这个template元素下所有slot元素会形成一个叫[slots](http://w3c.github.io/webcomponents/spec/shadow/#slots)的东西,而avalon则形成这样一个对象
+
+```javascript
+var slots = {
+  aaa: [ASlotElement, BSlotElement],//A,B slot元素的name属性值都是aaa
+  bbb: [CSlotElement], //C slot元素的name属性值为bbb,
+  default: [DSlotElement,ESlotElement] 
+  // D,E slot元素没有指定name属性,默认为default
+}
+```
+然后我们在外面使用时, 为自定义标签添加一些子节点, 让它们带有slot属性, 当它们的属性值与 定义时的slot元素的name值一致,就会进行替换操作.从而解决传入大片HTML参数的问题.
+![](dom-insert.png)
+如果我们只有一个插入点,并且不想自定义标签内部再写带slot属性的元素, 这时可以使用soloSlot配置项.这时整个innerHTML都默认为soloSlot值的插入点
+```html
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="../dist/avalon.js"></script>
+        <script>
+      avalon.component('ms-button', {
+          template: '<button type="button"><span><slot name="buttonText"></slot></span></button>',
+          defaults: {
+              buttonText: "button"//指定插入点的默认值
+          },
+          soleSlot: 'buttonText'//指定插入点的名字
+      })
+      avalon.define({
+          $id:'test',
+          aaa: "按钮"
+      })
+      </script>
+</head>
+<body>
+    <div ms-controller='test'>
+        <ms-button>{{@aaa}}</ms-button>
+    </div>
+</body>
+</html>
+```
 ##组件定义
 
+avalon定义组件时是使用avalon.component方法。
+
+avalon.component方法有两个参数,第一个标签名,必须以ms-开头;第二个是配置对象.
+
+配置对象里也有4个配置项
+
+* template,自定义标签的outerHTML,它必须是用一个普通的HTML元素节点包起来,里面可以使用ms-*等指令
+* defaults,用来定义这个组件的VM有什么属性与方法
+* soleSlot,表示自定义标签的innerHTML为一个默认的插入点 (或可理解为定义标签的innerHTML为当前组件某个属性的属性值) ,可选。
+* getTemplate, 用来修改template, 依次传入vm与template, 返回新的模板， 可选。
+
+```
+avalon.component('ms-pager', {
+      template: '<div><input type="text" ms-duplex-number="@num"/><button type="button" ms-on-click="@onPlus">+++</button></div>',
+      defaults: {
+          num: 1,
+          onPlus: function () {
+              this.num++;
+          }
+      },
+      getTemplate: function(vm, template){
+         return template.replace('ms-on-click','ms-on-mousenter')
+      }
+  });  
+```
+
 ##生命周期
+
 
 ##注意事项
