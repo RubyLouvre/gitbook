@@ -1,3 +1,5 @@
-# First Chapter
+# 简介
 
-GitBook allows you to organize your book into chapters, each chapter is stored in a separate file like this one.
+avalon2是一款基于虚拟DOM与属性劫持的 迷你、 易用、 高性能 的 前端MVVM框架， 适用于各种场景, 兼容各种古老刁钻浏览器, 吸收最新的技术成果, 能迅速堆砌组件与应用。
+
+谁在使用avalon
