@@ -2,9 +2,9 @@
 
 avalon2是一款基于虚拟DOM与属性劫持的 迷你、 易用、 高性能 的 前端MVVM框架， 适用于各种场景, 兼容各种古老刁钻浏览器, 吸收最新的技术成果, 能迅速堆砌组件与应用。
 
-# [谁在使用avalon](who.md)
+## [谁在使用avalon](who.md)
 
-# 使用方式
+## 使用方式
 
 avalon2： https://github.com/RubyLouvre/avalon/tree/2.1.0/dist
 
@@ -31,19 +31,20 @@ avalon.next 支持IE12+(edge)及chrome49, firefox49(判定标准是
        这些浏览器是否支持Proxy, document.registerElement)
 ```
 
-avalon1.5： [https://github.com/RubyLouvre/avalon/tree/1.5.6/dist](https://github.com/RubyLouvre/avalon/tree/1.5.6/dist)
+##早期版本的支持
 
-[1.5的入门教程](http://www.cnblogs.com/rubylouvre/p/4783966.html)
-
-avalon1.4: [https://github.com/RubyLouvre/avalon/tree/1.4.7.2/dist](https://github.com/RubyLouvre/avalon/tree/1.4.7.2/dist)
 
 [1.4的入门教程](http://www.cnblogs.com/rubylouvre/p/3181291.html)
+[1.4的仓库地](https://github.com/RubyLouvre/avalon/tree/1.4.7.2/dist)
 
-[1.4, 1.5的官网地址](http://avalonjs.github.io/)
+[1.5的入门教程](http://www.cnblogs.com/rubylouvre/p/4783966.html)
+[1.5的仓库地址](https://github.com/RubyLouvre/avalon/tree/1.5.6/dist)
+
+
+[旧的官网地址](http://avalonjs.github.io/)
 
 avalon论坛 : [http://www.avalon.org.cn/](http://www.avalon.org.cn/)
 
->注意 : 以上三个分支都比较稳定, 但互相不太兼容。 建议直接用2.0。
 
 # avalon2的架构图
 ![](http://avalonjs.coding.me/share/img/4.jpg)
