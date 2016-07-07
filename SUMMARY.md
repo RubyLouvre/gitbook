@@ -26,5 +26,5 @@
 * [过滤器](filter.md)
 * [类型转换器](duplex-parser.md)
    * 表单验证
-* 表单验证
+* [表单验证](duplex-validate.md)
 
