@@ -1,7 +1,6 @@
 {
     "plugins": [
-        "add-header",
-        "highlight2"
+        "add-header"
     ],
     "pluginsConfig": {}
 }
