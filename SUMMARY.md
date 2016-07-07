@@ -18,4 +18,5 @@
    * [ms-rules](directives/ms-rules.md)
    * [ms-validate](directives/ms-validate.md)
    * [ms-for](directives/ms-for.md)
-   * 
+   * [ms-effect](directives/ms-effect.md)
+   * [ms-widget](directives/ms-widget.md)
