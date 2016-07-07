@@ -20,6 +20,6 @@
    * [ms-for](directives/ms-for.md)
    * [ms-effect](directives/ms-effect.md)
    * [ms-widget](directives/ms-widget.md)
-   * 插值表达式
+   * [插值表达式](expr.md)
 * [组件](component.md)
 
