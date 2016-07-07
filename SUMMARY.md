@@ -8,3 +8,10 @@
    * [ms-css](directives/ms-css.md)
    * [ms-text](directives/ms-text.md)
    * [ms-html](directives/ms-html.md)
+   * [ms-class](directives/ms-class.md)
+   * [ms-hover](directives/ms-hover.md)
+   * [ms-active](directives/ms-active.md)
+   * [ms-controller](directives/ms-controller.md)
+   * [ms-important](directives/ms-important.md)
+   * [ms-skip](directives/ms-skip.md)
+   
