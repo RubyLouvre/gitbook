@@ -62,6 +62,21 @@ xmp, wbr, template
 <wbr ms-widget='{is:"ms-button"}'/>
 <template ms-widget='{is:"ms-button"}'></template>
 ```
+
+这个ms-widget配置对象，里面有这些配置项：
+```
+is, 字符串, 指定组件的类型。如果你使用了自定义标签，这个还可以省去。
+
+$id, 字符串, 指定组件vm的$id，这是可选项。
+
+define, 函数, 自己决定如何创建vm，这是可选项。
+
+onInit, onReady, onViewChange, onDispose四大生命周期钩子。
+
+及其他与组件相关的方法与属性（用于重写defaults方法的默认值）
+
+```
+
 在JS中，我们是这样使用它
 
 ```html
@@ -185,35 +200,99 @@ innerHTML内，添加一些slot元素，并且指定其name就行了。
 
 > 有关avalon.component的详细用法,可见这里
 
-```
-    <script>    
+```html
+<script>    
 div.innerHTML = heredoc(function () {
-        /*
-         <div ms-controller='widget0' >
-         <template ms-widget="{is:'ms-button'}">{{@btn}}</template>
-         <ms-button>这是标签里面的TEXT</ms-button>
-         <ms-button ms-widget='{buttonText:"这是属性中的TEXT"}'></ms-button>
-         <ms-button></ms-button>
-         </div>
-         */
-    })
-    vm = avalon.define({
-        $id: 'widget0',
-        btn: '这是VM中的TEXT'
-    })
-    avalon.scan(div)
-    setTimeout(function () {
-        var span = div.getElementsByTagName('span')
-        expect(span[0].innerHTML).to.equal('这是VM中的TEXT')
-        expect(span[1].innerHTML).to.equal('这是标签里面的TEXT')
-        expect(span[2].innerHTML).to.equal('这是属性中的TEXT')
-        expect(span[3].innerHTML).to.equal('button')
-        vm.btn = '改动'
-        setTimeout(function () {
-            expect(span[0].innerHTML).to.equal('改动')
-            done()
-        })
-    })
-    </script>
+  /*
+   <div ms-controller='widget0' >
+   <template ms-widget="{is:'ms-button'}">{{@btn}}</template>
+   <ms-button>这是标签里面的TEXT</ms-button>
+   <ms-button ms-widget='{buttonText:"这是属性中的TEXT"}'></ms-button>
+   <ms-button></ms-button>
+   </div>
+   */
+})
+vm = avalon.define({
+  $id: 'widget0',
+  btn: '这是VM中的TEXT'
+})
+avalon.scan(div)
+setTimeout(function () {
+  var span = div.getElementsByTagName('span')
+  expect(span[0].innerHTML).to.equal('这是VM中的TEXT')
+  expect(span[1].innerHTML).to.equal('这是标签里面的TEXT')
+  expect(span[2].innerHTML).to.equal('这是属性中的TEXT')
+  expect(span[3].innerHTML).to.equal('button')
+  vm.btn = '改动'
+  setTimeout(function () {
+      expect(span[0].innerHTML).to.equal('改动')
+  })
+})
+</script>
+```
+###生命周期钩子
 
+avalon2的生命周期监听比起1代是大幅增强了。共有4个钩子可用。
+
+1.  onInit，这是组件的vm创建完毕就立即调用时，这时它对应的元素节点或虚拟DOM都不存在。只有当这个组件里面不存在子组件或子组件的构造器都加载回来，那么它才开始创建其虚拟DOM。否则原位置上被一个注释节点占着。
+
+2.  onReady，当其虚拟DOM构建完毕，它就生成其真实DOM，并用它插入到DOM树，替换掉那个注释节点。相当于其他框架的attachedCallback， inserted, componentDidMount.
+
+3.  onViewChange，当这个组件或其子孙节点的某些属性值或文本内容发生变化，就会触发它。它是比Web Component的attributeChangedCallback更加给力。
+
+4.  onDispose，当这个组件的元素被移出DOM树，就会执行此回调，它会移除相应的事件，数据与vmodel。
+
+
+avalon是使用多种策略来监听元素是否移除，确保onDispose回调会触发！
+```html
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="./dist/avalon.js"></script>
+        <script>
+avalon.component('ms-button', {
+    template: '<button type="button"><span><slot name="buttonText"></slot></span></button>',
+    defaults: {
+        buttonText: "button"
+    },
+    soleSlot: 'buttonText'
+})
+var vm = avalon.define({
+    $id: 'widget0',
+    config: {
+        buttonText: '按钮',
+        onInit: function (a) {
+            console.log("onInit!!")
+        },
+        onReady: function (a) {
+            console.log("onReady!!")
+        },
+        onViewChange: function () {
+            console.log("onViewChange!!")
+        },
+        onDispose: function () {
+            console.log("onDispose!!")
+        }
+    }
+})
+setTimeout(function () {
+    vm.config.buttonText = 'change'
+    setTimeout(function () {
+        document.body.innerHTML = ""
+    }, 1000)
+}, 1000)
+
+        </script>
+    </head>
+
+    <body>
+        <div ms-controller='widget0' >
+            <div><wbr ms-widget="[{is:'ms-button'},@config]"/></div>
+        </div>
+    </body>
+</html>
 ```
