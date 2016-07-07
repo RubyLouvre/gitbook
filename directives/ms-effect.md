@@ -227,7 +227,7 @@ onEnterDone, onLeaveDone, onEnterAbort, onLeaveAbort, onBeforeEnter, onBeforeLea
     </body>
 </html>
 ```
-####ms-widget+ms-for+ms-if+ms-effect的组合动画效果！
+** ms-widget+ms-for+ms-if+ms-effect的动画效果 **
 
 ```html
 <!DOCTYPE html>
@@ -288,7 +288,8 @@ onEnterDone, onLeaveDone, onEnterAbort, onLeaveAbort, onBeforeEnter, onBeforeLea
     </body>
 </html>
 ```
-####ms-for与stagger的动画效果
+** ms-for与stagger的动画效果 **
+
 这次为了与angular一致，stagger改为一个小数，它会让当前元素延迟stagger秒执行。
 
 ```html
