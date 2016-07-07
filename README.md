@@ -1,3 +1,4 @@
-# My Awesome Book
+# avalon2教程
 
-This file file serves as your book's preface, a great place to describe your book's content and ideas.
+这是avalon2的官方教程
+
