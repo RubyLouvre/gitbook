@@ -5,7 +5,7 @@
 
 数据格式绑定属性
 
-##uppercase
+##uppercase##
 
 将字符串全部大写
 
@@ -14,7 +14,7 @@ vm.aaa = "aaa"
 
 <div>{{@aaa | uppercase}}</div>
 ```
-##lowercase
+##lowercase##
 
 将字符串全部小写
 
@@ -23,7 +23,7 @@ vm.aaa = "AAA"
 
 <div>{{@aaa | lowercase}}</div>
 ```
-##truncate
+## truncate
 
 对长字符串进行截短，有两个可选参数
 
