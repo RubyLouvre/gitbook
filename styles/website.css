@@ -1,2 +1,4 @@
 /* CSS for website */
-p{text-align: 2em}
+.markdown-section p{ 
+    text-indent: 2em;
+}
