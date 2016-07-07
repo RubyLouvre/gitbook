@@ -14,4 +14,8 @@
    * [ms-controller](directives/ms-controller.md)
    * [ms-important](directives/ms-important.md)
    * [ms-skip](directives/ms-skip.md)
-   
+   * [ms-duplex](directives/ms-duplex.md)
+   * [ms-rules](directives/ms-rules.md)
+   * [ms-validate](directives/ms-validate.md)
+   * [ms-for](directives/ms-for.md)
+   * 
