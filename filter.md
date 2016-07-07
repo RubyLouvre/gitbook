@@ -1,12 +1,15 @@
 # 过滤器
 
+[TOC]
+
+
 数据格式绑定属性
 
 ##uppercase
 
 将字符串全部大写
 
-```
+```javascript
 vm.aaa = "aaa"
 
 <div>{{@aaa | uppercase}}</div>
@@ -15,38 +18,42 @@ vm.aaa = "aaa"
 
 将字符串全部小写
 
-
+```javascript
 vm.aaa = "AAA"
 
 <div>{{@aaa | lowercase}}</div>
-truncate
+```
+##truncate
 
 对长字符串进行截短，有两个可选参数
 
 number，最后返回的字符串的长度，已经将truncation的长度包含在内，默认为30。
 truncation，告知用户它已经被截短的一个结尾标识，默认为"..."
 
+```javascript
 vm.aaa = "121323234324324"
 
 <div>{{@aaa | truncate(10,'...')}}</div>
-camelize
+```
+
+##camelize
 
 驼峰化处理， 如"aaa-bbb"变成"aaaBBB"
 
-escape
+##escape
 
 对类似于HTML格式的字符串进行转义，如将<、 >转换为<、 >
 
-sanitize
+##sanitize
 
-对用户输入的字符串进行反XSS处理，去掉onclick, javascript:alert，<script>等危险属性与标签。
+对用户输入的字符串进行反XSS处理，去掉onclick, `javascript:alert`，`<script>`等危险属性与标签。
 
-number
+##number
 
 对需要处理的数字的整数部分插入千分号（每三个数字插入一个逗号），有一个参数fractionSize，用于保留小数点的后几位。
 
 fractionSize:小数部分的精度，默认为3。
-
+```html
 <!DOCTYPE html>
 <html>
 <head>
@@ -75,24 +82,16 @@ fractionSize:小数部分的精度，默认为3。
 </body>
  
 </html>
+```
 
-输入数字:  
-1234.56789
+##currency
 
-不处理：1234.56789
+用于格式化货币，类似于number过滤器（即插入千分号），但前面加了一个货币符号，默认使用人民币符号`\uFFE5`
 
-不传参：1,234.568
-
-不保留小数：1,235
-
-负数:-1,234.5679
-currency
-
-用于格式化货币，类似于number过滤器（即插入千分号），但前面加了一个货币符号，默认使用人民币符号\uFFE5
-
-symbol, 货币符号，默认是\uFFE5
+symbol, 货币符号，默认是`\uFFE5`
 fractionSize，小数点后保留多少数，默认是2
-date
+
+##date
 
 对日期进行格式化，date(formats), 目标可能是符合一定格式的字符串，数值，或Date对象。
 
