@@ -46,7 +46,7 @@ avalon.next 支持IE12+(edge)及chrome49, firefox49(判定标准是
 avalon论坛 : [http://www.avalon.org.cn/](http://www.avalon.org.cn/)
 
 
-# avalon2的架构图
+## avalon2的架构图
 ![](http://avalonjs.coding.me/share/img/4.jpg)
 
 ```html
@@ -79,7 +79,7 @@ avalon论坛 : [http://www.avalon.org.cn/](http://www.avalon.org.cn/)
 3. 圈定作用域,使用ms-controller告诉框架,只处理这个范围内的标签
 4. 引导符,使用@来告诉框架这些变量是来自vm的
 
-# avalon起源
+## avalon起源
 ----------------------
 
 avalon 是一个简单易用迷你的MVVM框架，它最早发布于2012.09.15， 为解决同一业务逻辑存在各种视图呈现而开发出来的。 事实上，这问题其实也可以简单地利用一般的前端模板加jQuery 事件委托 搞定， 但随着业务的膨胀， 代码就充满了各种选择器与事件回调，难以维护。 因此彻底的将业务与逻辑分离，就只能求助于架构。 最初想到的是MVC，尝试过backbone，但代码不降反升，很偶尔的机会，碰上微软的WPF， 优雅的MVVM架构立马吸引住我，我觉得这就是我一直寻找的解决之道。
