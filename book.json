@@ -2,11 +2,8 @@
     "plugins": [
         "header",
         "betterchinese",
-        "toc-for-3"
+        "toc-for-3",
+        "layout"
     ],
-    "pluginsConfig": {
-        "layout": {
-          "headerPath" : "layouts/header.html"
-       }
-    }
+    "pluginsConfig": {}
 }
