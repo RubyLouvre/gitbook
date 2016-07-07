@@ -2,7 +2,7 @@
     "plugins": [
         "header",
         "betterchinese",
-        "toc-for-3"
+        "page-toc"
     ],
     "pluginsConfig": {
         "layout":{
