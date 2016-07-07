@@ -2,11 +2,32 @@
     "plugins": [
         "header",
         "betterchinese",
-        "page-toc"
+        "page-toc",
+        "splitter",
+         "-search",
+        "search-pro",
+         "advanced-emoji",
+         "github" ,
+         "emphasize",
+         "include-codeblock",
+         "tbfed-pagefooter",
+         "toggle-chapters"
     ],
     "pluginsConfig": {
         "layout":{
            "headerPath" : "layouts/header.html"
-        }
+         },
+         "search-pro": {
+            "cutWordLib": "nodejieba",
+            "defineWord" : ["Gitbook Use"]
+        },
+        "github": {
+           "url": "https://github.com/rubylouver"
+        },
+         "tbfed-pagefooter": {
+            "copyright":"Copyright &copy; 司徒正 2016－2016",
+            "modify_label": "该文件修订时间：",
+            "modify_format": "YYYY-MM-DD HH:mm:ss"
+       }
     }
 }
