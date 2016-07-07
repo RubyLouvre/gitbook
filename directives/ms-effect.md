@@ -104,6 +104,7 @@ ms-effect的值为一个对象，其中is是必选。除了action, 还支持这�
 ```
 onEnterDone, onLeaveDone, onEnterAbort, onLeaveAbort, onBeforeEnter, onBeforeLeave
 ```
+![](effect1.gif)
 如果使用JS实现，则是这样的：
 ```html
 <!DOCTYPE html>
