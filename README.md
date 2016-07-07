@@ -1,4 +1,3 @@
-# avalon2教程
+# avalon2
 
-这是avalon2的官方教程
-
+## 迷你 、 易用 、 高性能 的前端MVVM框架
