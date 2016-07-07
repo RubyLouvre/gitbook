@@ -21,5 +21,6 @@
    * [ms-effect](directives/ms-effect.md)
    * [ms-widget](directives/ms-widget.md)
    * [插值表达式](expr.md)
+   * 自定义标签
 * [组件](component.md)
 
