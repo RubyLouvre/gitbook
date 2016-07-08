@@ -222,4 +222,28 @@ $fire可以传多个参数， 第一个参数为事件名，或者说是VM上已
 
 我们需要在页面上，使用ms-controller或ms-important来圈定每个vm的作用范围。当页面domReady时，vm就将自动将其里面的数据替换到各种指令中去，实现视图刷新效果。
 
+> 注意一个vm只能在页面上使用一次。即页面上不能重复出现相同的值的ms-controller。
+
+```html
+<div ms-controller="test">{{@aaa}}</div>
+<div ms-controller="test">{{@aaa}}</div>
+<div ms-controller="test">{{@aaa}}</div>
+
+```
+
+由于test这个vm拥有一个叫$element的属性，它是保存其关联的元素节点，如果定义了多少个，那么它会保留最后的那个DIV。以后它的属性变化，只会作用最后的那个DIV。
+
 ##vm的运作原理
+
+avalon之所以使用Proxy, Object.defineProperty或VBScript来构造vm，那是因为它们创建出来的对象有一种自省机制，能让我们得知vm正在操作或访问了我们的对象。
+
+对于Object.defineProperty或VBScript，主要是靠将普通属性变成访问器属性。访问器属性内部是拥有两个方法，setter与getter。当用户读取对象的属性时，就将调用其getter方法，当用户为此属性赋值时，就会调用setter方法。因此，我们就不需要像angular那样，使用脏检测，就得知对象被修改了某些属性了。并且能准确得知那些属性，及时地同步视图的相应区域，实现最小化刷新视图。
+
+
+对于Proxy(智能对象)，这最早发迹于firefox4，现在许多新浏览器都支持，它能监听外部用户对它的14种，比如说读写属性，调用方法，删除旧属性，添加新属性，被for in循环， 被in关键字进行存在性检测， 被new……因此之前所说的，不能监听没预先定义的属性， 这个难题被Proxy搞定了。
+
+当我们得知vm的属性发生变化了，如何更新视图呢？在avalon2中，这个是由虚拟DOM来处理。
+
+
+
+
