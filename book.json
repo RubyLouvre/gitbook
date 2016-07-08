@@ -10,7 +10,8 @@
         "tbfed-pagefooter",
         "toggle-chapters",
         "page-toc",
-        "include"
+        "include",
+        "style"
     ],
     "pluginsConfig": {
         "github": {
