@@ -3,13 +3,13 @@
 
 avaon会在DOMReady对.ms-controller节点进行outerHTML操作
 之前是直接用outerHTML,但后来发现outerHTML在各个浏览器下差异性太大了.
-IE6-7会对colgroup,dd,dt,li,options,p,td,tfoot,th,thead,tr元素自闭合
+IE6-7会对colgroup, dd, dt, li, options, p, td, tfoot, th, thead, tr元素自闭合
 让我的htmlPaser跪掉
 于是写了htmlfy,手动取每个元素nodeName, attrName, attrValue, nodeValue来构建outerHTML
 
 第2阶段,将这个字符串进行parser,转换为虚拟DOM
 这个阶段对input/textarea元素补上type属性,
-ms-*自定义元素补上ms-widget属性,
+`ms-*`自定义元素补上ms-widget属性,
 对table元素补上tbody,
 在ms-for指令的元素两旁加上
 `<!--ms-for-->`,`<!--ms-for-end-->`占位符,
@@ -19,7 +19,7 @@ ms-*自定义元素补上ms-widget属性,
 第3个阶段,优化,对拥有ms-*属性的虚拟DOM添加dynamic属性
 表明它以后要保持其对应的真实节点
 并对没有ms-*属性的元素添加skipAttrs属性,表明以后不需要遍历其属性
-如果它的子孙没有ms-*或{{}}插值表达式或ms-自定义元素,那么还加上skipContent
+如果它的子孙没有`ms-*`或`{{}}`插值表达式或ms-自定义元素,那么还加上skipContent
 表明以后不要遍历其孩子.
 
 这三个属性,dynamic用于节点对齐算法,skipAttrs与skipContent用于diff算法
