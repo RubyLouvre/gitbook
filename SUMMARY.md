@@ -2,6 +2,7 @@
 
 * [Introduction](README.md)
 * [介绍](home.md)
+* [ms-skip](directives/ms-skip.md)
 * [指令](directive.md)
    * [ms-attr](directives/ms-attr.md)
    * [ms-if](directives/ms-if.md)
