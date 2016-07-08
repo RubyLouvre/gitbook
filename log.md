@@ -75,7 +75,7 @@ ie7,8下 ms-duplex 因为onproppertychange环调用，导致辞爆栈的问题
 
 修正on指令的UUID问题
 
-修正__local__往下传递 问题
+修正`__local__`往下传递 问题
 
 参考react 的classNames插件，重构ms-class/active/hover，
 
@@ -83,9 +83,6 @@ ie7,8下 ms-duplex 因为onproppertychange环调用，导致辞爆栈的问题
 
 重构isInCache， saveInCache
 
--------------------------
-
-## avalon内部运作原理 ##
 
 
 
