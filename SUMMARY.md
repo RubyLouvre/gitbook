@@ -29,5 +29,5 @@
 * [表单验证](duplex-validate.md)
 * [配置](config.md)
 * [移动端支持](mobile.md)
-* 常见问题
+* [常见问题](questions.md)
 
