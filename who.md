@@ -5,7 +5,6 @@
 
 <script src="//cdn.bootcss.com/avalon.js/2.1.0/avalon.js"></script>
 
-
 <div class="row jumbotron">
     <ul class="logos" ms-controller="logos">
         <li ms-for="el in @logos">
