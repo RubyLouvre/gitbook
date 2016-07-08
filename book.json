@@ -19,6 +19,12 @@
         "github": {
             "url": "https://github.com/RubyLouvre"
         },
+
+        "scripts": {
+            "files": [
+                "./other.js"
+            ]
+        },
         "tbfed-pagefooter": {
             "copyright": "Copyright &copy; 司徒正 2016－2016",
             "modify_label": "该文件修订时间：",
