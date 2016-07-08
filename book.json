@@ -15,7 +15,6 @@
         "layout":{
            "headerPath" : "layouts/header.html"
          },
-       
         "github": {
            "url": "https://github.com/RubyLouvre"
         },
