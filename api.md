@@ -492,25 +492,22 @@ console.log(a.element) // document.body
 avalon作为一个MVVM框架, 目的是实现最小化刷新, 通常没有操作一大堆节点的需求
 >
 >avalon的实例方法主要供框架内部使用,除了自己写组件,所有操作的DOM的需求请使用ms-*
-如果要使用第三方的jQuery插件,请务必将它们封装成**avalon的组件**
+如果要使用第三方的jQuery插件,请务必将它们封装成**[avalon的组件](component.md)**
 
-<pre>
-@img("avalon.api.png",763,628)
-</pre>
-
-## css
+![](avalon.api.png)
+### css
 
 用于获取或修改样式,自动修正厂商前缀及加px,与jQuery的css方法一样智能
 ```javascript
 avalon(elem).css('float','left')
 ```
 
-## width
+### width
 取得目标的宽,不带单位,如果目标为window,则取得窗口的宽,为document取得页面的宽
 ```javascript
 avalon(elem).width()
 ```
-## height
+### height
 取得目标的高,不带单位,如果目标为window,则取得窗口的高,为document取得页面的高
 
 ### innerWidth
