@@ -11,9 +11,9 @@
         "toggle-chapters",
         "page-toc"
     ],
-    "pluginsConfig": 
-        "layout":{
-           "headerPath" : "layouts/header.html"
+    "pluginsConfig":
+        "layout": {
+           "headerPath": "layouts/header.html"
          },
         "github": {
             "url": "https://github.com/RubyLouvre"
