@@ -72,7 +72,7 @@ setTimeout(function () {
 
 VM中的数据更新，只能通过 = 赋值方式实现。但要注意在IE6-8，由于VM是一个VBScript对象，为VM添加新属性会抛错， 因此我们想批量更新属性要时格外小心了，需要用hasOwnProperty进行过滤。
 
-{% span color="red" %}注意在IE6-8 下，err是VBscript的关键字，VM中存在这个字段，就会将VM中的其他数组变成字符串，详见[这里](https://github.com/RubyLouvre/avalon/issues/627) {% endspan %}
+{% em color="red" %}注意在IE6-8 下，err是VBscript的关键字，VM中存在这个字段，就会将VM中的其他数组变成字符串，详见[这里](https://github.com/RubyLouvre/avalon/issues/627) {% endem %}
 
 >为了性能起见，请确保你的对象结构足够扁平，套嵌层次不能太深，里面的数组不能太长。
 
