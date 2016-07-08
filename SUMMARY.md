@@ -3,6 +3,7 @@
 * [Introduction](README.md)
 * [介绍](home.md)
    * [who](who.md)
+   * vm
 * [指令](directive.md)
    * [ms-skip](directives/ms-skip.md)
    * [ms-controller](directives/ms-controller.md)
