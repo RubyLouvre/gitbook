@@ -5,6 +5,7 @@ avalon2是一款基于虚拟DOM与属性劫持的 迷你、 易用、 高性能 
 
 ## [谁在使用avalon](who.md)
 
+
 ## 使用方式
 
 avalon2： https://github.com/RubyLouvre/avalon/tree/2.1.0/dist
@@ -32,23 +33,37 @@ avalon.next 支持IE12+(edge)及chrome49, firefox49(判定标准是
        这些浏览器是否支持Proxy, document.registerElement)
 ```
 
-##早期版本的支持
+
+##学习资料
 
 
 [1.4的入门教程](http://www.cnblogs.com/rubylouvre/p/3181291.html)
+
 [1.4的仓库地](https://github.com/RubyLouvre/avalon/tree/1.4.7.2/dist)
 
+[1.4的另一个更漂亮的教程](http://limodou.github.io/avalon-learning/zh_CN/index.html)
+
 [1.5的入门教程](http://www.cnblogs.com/rubylouvre/p/4783966.html)
+
 [1.5的仓库地址](https://github.com/RubyLouvre/avalon/tree/1.5.6/dist)
 
+[1.×的视频教程](http://edu.51cto.com/course/course_id-2533-page-1.html)
 
-[旧的官网地址](http://avalonjs.github.io/)
+[1.*的官网地址](http://avalonjs.github.io/)
 
-avalon论坛 : [http://www.avalon.org.cn/](http://www.avalon.org.cn/)
+[前端乱炖网站上的avalon1.5学习教程](http://www.html-js.com/article/column/234)
+
+[segementfault网站上的avalon2学习教程](https://segmentfault.com/u/situzhengmei/articles)
+
+[avalon论坛](http://www.avalon.org.cn/) 
+
+QQ学习群: 314247255
 
 
-## avalon2的架构图
-![](http://avalonjs.coding.me/share/img/4.jpg)
+电子文档(PDF，dPub, Mobi)下载：[gitbook](https://www.gitbook.com/book/rubylouvre/avalon/details)
+
+##入门例子
+
 
 ```html
 <!DOCTYPE html>
