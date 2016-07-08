@@ -91,7 +91,7 @@
     margin-left: auto;
 }
 .jumbotron ul{
-   margin-left:0px!important;
+   margin-left:-20px!important;
 }
 .jumbotron{
     border-radius: 6px;
