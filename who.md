@@ -5,16 +5,9 @@
 
 <script src="//cdn.bootcss.com/avalon.js/2.1.0/avalon.js"></script>
 
-<script type="text/javascript">
-   
-</script>
-<style>
-
-</style>
 
 <div class="row jumbotron">
     <ul class="logos" ms-controller="logos">
-
         <li ms-for="el in @logos">
             <a ms-attr="{href: el.link}" target="_blank" >
                 <img ms-attr="{src: 'http://avalonjs.coding.me/share/img/logos/'+el.src}"/>
