@@ -1,5 +1,4 @@
 # API
-<!-- toc -->
 
 ##静态成员
 
@@ -220,7 +219,7 @@ avalon.type(/\w+/) //'regexp'
 avalon.type(avalon.noop) //'function'
 ```
 
-## isPlainObject
+### isPlainObject
 
 判定是否为一个纯净的JS对象, 不能为window, 任何类(包括**自定义类**)的实例,元素节点,文本节点
 >用于内部的深克隆, VM的赋值, each方法
