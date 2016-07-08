@@ -5,4 +5,4 @@
 ```html
 <p>{{@firstName+' '+@lastName}}</p>
 ```
-插值表达式一般与带格式功能的过滤器一起使用.
+插值表达式一般与[带格式化功能的过滤器](http://avalonjs.coding.me/filter.html#格式化过滤器)一起使用.
