@@ -8,3 +8,23 @@ HTML绑定类似于文本绑定,能将一个元素清空,填上你需要的内�
 <span ms-html="@aaa">不使用过滤器</span>
 <span ms-html="@aaa | uppercase">使用过滤器</span>
 ```
+
+
+我们可以通过ms-html异步加载大片内容。
+
+```javascript
+var vm = avalon.define({
+  $id: "test",
+  aaa: "loading..."
+})
+
+jQuery.ajax({
+   url:'action.do',
+   success: function(data){
+      vm.aaa = data.html
+   }
+})
+```
+```html
+<div ms-controller="test" ms-html="@aaa"></div>
+```
