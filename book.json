@@ -12,7 +12,8 @@
         "page-toc",
         "include",
         "style",
-        "toolbar"
+        "toolbar",
+        "scripts"
     ],
     "pluginsConfig": {
         "github": {
