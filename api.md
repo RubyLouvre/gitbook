@@ -513,24 +513,25 @@ avalon(elem).width()
 ## height
 取得目标的高,不带单位,如果目标为window,则取得窗口的高,为document取得页面的高
 
-## innerWidth
+### innerWidth
+
 类似于jQuery的innerWidth
 
-## innerHeight
+### innerHeight
 类似于jQuery的innerHeight
 
 
-## outerWidth
+### outerWidth
 类似于jQuery的outerWidth
 
-## outerHeight
+### outerHeight
 类似于jQuery的outerHeight
 
-## offset
+### offset
 取得元素的位置, 如 `{top:111, left: 222}`
 
 
-## attr
+### attr
 
 用于获取或修改属性
 ```javascript
@@ -539,22 +540,22 @@ avalon(elem).attr('title','aaa')
 >注意,这个方法内部只使用setAttribute及getAttribute方法,非常弱
 建议使用**ms-attr**指令实现相同的功能
 
-## addClass
+### addClass
 添加多个类名, 以空格隔开
 ```javascript
 avalon(elem).addClass('red aaa bbb')
 ```
 
-## removeClass
+### removeClass
 移除多个类名, 以空格隔开
 ```javascript
 avalon(elem).removeClass('red aaa bbb')
 ```
 
-## hasClass
+### hasClass
 判定目标元素是否包含某个类名
 
-## toggleClass
+### toggleClass
 切换多个类名
 1. 类名,以空格隔开
 2. 可选, 为布尔时强制添加或删除这些类名
@@ -564,12 +565,12 @@ avalon(elem).removeClass('red aaa bbb')
 avalon(elem).toggleClass('aaa bbb ccc')
 ```
 
-## bind
+### bind
 类似于avalon.bind
 
 ```javascript
 avalon(elem).bind('click', clickFn)
 ```
 
-## unbind
+### unbind
 类似于avalon.unbind
