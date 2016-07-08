@@ -25,7 +25,7 @@ avalon定义了的vm，都可以在avalon.vmodels中查看到。我们可以在c
 3. 重量 带有访问器属性的对象, avalon VM对象
 4. 超重量 各种节点或window对象
 
-##vm的属性与方法
+##内部属性
 
 VM中以$开头的属性都是框架保留使用的特殊属性,大家为数据起名字时要小心避开
 
@@ -72,9 +72,154 @@ setTimeout(function () {
 
 VM中的数据更新，只能通过 = 赋值方式实现。但要注意在IE6-8，由于VM是一个VBScript对象，为VM添加新属性会抛错， 因此我们想批量更新属性要时格外小心了，需要用hasOwnProperty进行过滤。
 
-注意在IE6-8 下，err是VBscript的关键字，VM中存在这个字段，就会将VM中的其他数组变成字符串，详见[这里](https://github.com/RubyLouvre/avalon/issues/627)
+{% span color="red" %}注意在IE6-8 下，err是VBscript的关键字，VM中存在这个字段，就会将VM中的其他数组变成字符串，详见[这里](https://github.com/RubyLouvre/avalon/issues/627) {% endspan %}
 
+>为了性能起见，请确保你的对象结构足够扁平，套嵌层次不能太深，里面的数组不能太长。
+
+##监控属性
+
+在VM中，改变它们会引起视图改变的属性。如果一个属性是$开头, 或在定义时放在$skipArray数组中,或是函数或节点元素, 它们都不会转换成监控属性.
+
+此外, 改变监控属性的值还会触发对应的$watch监听回调.
+
+##监控数组
+
+操作此数组的方法会同步视图的特殊数组，它是由VM中的数组自动转换而来。方便与ms-repeat, ms-each配合使用， 能批量同步一大堆DOM节点。
+
+监控数组的方法与普通数组没什么不同，它只是被重写了某一部分方法，如 pop, shift, unshift, push, splice，sort, revert。其次添加了四个移除方法，remove, removeAt, removeAll, clear， 及ensure，pushArray，set方法。
+
+1. pushArray(el), 要求传入一数组，然后将它里面的元素全部添加到当前数组的末端。
+2. remove(el), 要求传入一元素，通过全等于比较进行移除。
+3. removeAt(index), 要求传入一数字，会移除对应位置的元素。
+4. removeAll(arrayOrFunction), 有三种用法，如果是一个函数，则过滤比较后得到真值的元素， 如果是一数组，则将此数组中与原数组相等于的元素全部移除；如果没有任何参数，则全部清空。
+5. clear()，相当于removeAll()的第三种方法，清空数组的所有元素。由于需要同步视图的缘故，不能通过vm.array.length = 0的方法来清空元素。
+6. ensure(el)，只有当数组不存在此元素时，只添加此元素。
+7. set(index, el)，用于更新某一索引位置中的元素，因为简单数组元素的数组，是不会转换它的元素。
+
+##非监控属性
+
+这包括框架添加的$id, $events, $model属性, $fire, $watch, $render方法， 及用户自己设置的以$开头的属性，放在$skipArray数组中的属性，值为函数、各种DOM节点的属性， 总之，改变它们的值不会产生同步视图的效果。
+
+
+##$watch方法
+
+在avalon早期是, 存在一个对象能mixin进每个VM,让VM具有$watch, $unwatch, $fire, $events等方法或属性. 这有点像jQuery的on, off, trigger方法,只是为了更造近angular等MVVM框架,名字起成这样.
+
+> 此方法是用于监听vm中的对象的属性变化.
+> 
+换言之,它不能监听函数,不能监听简单数组的元素变化(如[1,2,3]变成[4,2,3])
+
+它能监听子级对象的属性变化,能监听对象数组的属性变化(如[{a:1,a:2}]变成[{a:'change',a:2}]), 还有数组的长度属性变化
+
+此外从1.5起,支持"*"通配符,解决对数组元素,子属性的监听.注意,*号只能出现一次.
+
+下面是$watch方法的的七种用法
+
+
+```javascript
+var vm = avalon.define({
+    $id: "test",
+    array: [1, 2, 3],
+    d: 888,
+    arr: [{
+            a: 1
+        }, {
+            a: 2
+        }, {
+            a: 3
+        }],
+    obj: {
+        a: 1,
+        b: 2
+    },
+    a: {
+        b: {
+            c: {
+                d: 33
+            }
+        }
+    }
+})
+var expect = function (a) {
+    return {
+        to: {
+            be: function (b) {
+                console.log(a == b)
+            }
+        }
+
+    }
+}
+
+vm.$watch("array.length", function (a, b, name) {
+    console.log('第一组 数组长度', name)
+})
+vm.$watch("arr.*.a", function (a, b, name) {
+    expect(a).to.be(99)
+    expect(b).to.be(1)
+    console.log('第二组 数组元素属性(模糊匹配, 不知道哪个元素变化)', name)
+})
+vm.$watch("obj.a", function (a, b, name) {
+    expect(a).to.be(111)
+    expect(b).to.be(1)
+    console.log('第三组 属性的属性', name)
+})
+
+vm.$watch("obj.*", function (a, b, name) {
+    expect(a).to.be(111)
+    expect(b).to.be(1)
+    console.log('第四组 属性的属性(模糊匹配)', name)
+})
+
+vm.$watch("a.b.c.d", function (a, b, name) {
+    expect(a).to.be(88)
+    expect(b).to.be(33)
+    console.log('第五组 属性的属性的属性', name)
+})
+vm.$watch("a.*.c.d", function (a, b, name) {
+    expect(a).to.be(88)
+    expect(b).to.be(33)
+    console.log('第六组 属性的属性的属性(模糊匹配)', name)
+})
+vm.$watch("*", function (a, b, name) {
+    expect(a).to.be(999)
+    expect(b).to.be(888)
+    console.log('第七组 第一层对象的任意属性(模糊匹配)', name)
+})
+setTimeout(function () {
+    vm.array.set(1, 6)
+    vm.array.push(99)
+    vm.arr[0].a = 99
+    vm.obj.a = 111
+    vm.a.b.c.d = 88
+    vm.d = 999
+}, 100)
+```
+$watch会返回一个函数,用于解除监听:
+
+```javascript
+var unwatch = vm.$watch("array.*", function (a, b) {
+    expect(a).to.be(6)
+    expect(b).to.be(2)
+})
+unwatch() //移除当前$watch回调
+````
+监听函数有三个参数， 第一个是新值， 第二个是旧值， 第三个是发生变动的属性的名字。
+
+$watch方法供与其他操作DOM的库一起使用的,如富文本编辑器什么. 在$watch回调里更新VM自身的属性是非常危险的事,很容易引发死循环
+
+##$fire方法
+
+$fire可以传多个参数， 第一个参数为事件名，或者说是VM上已存在的属性名， 当VM中对应的属性发生变化时，框架内部就调用$fire方法， 依次传入属性名，当前属性值，过去属性值。
+
+##数据模型
+
+是指VM中的$model属性，它是一个纯净的javascript对象，去掉$id, $watch等方法或属性，可以直接通过$.ajax提交给后端，当然我们 还可以通过JSON.parse(JSON.stringify(vm.$model))干掉里面的所有函数。
+
+> 注意,不要修改$model,你只能通过VM来改动$model,否则在1.5中,$model是只读的,每次都是返回一个全新的对象给你 你改了也没有用!
 
 ##vm是如何作用视图
+
+我们需要在页面上，使用ms-controller或ms-important来圈定每个vm的作用范围。当页面domReady时，vm就将自动将其里面的数据替换到各种指令中去，实现视图刷新效果。
 
 ##vm的运作原理
