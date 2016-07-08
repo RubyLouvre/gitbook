@@ -4,6 +4,7 @@
 * [介绍](home.md)
    * [who](who.md)
    * [vm](vm.md)
+   * 虚拟DOM
 * [指令](directive.md)
    * [ms-skip](directives/ms-skip.md)
    * [ms-controller](directives/ms-controller.md)
