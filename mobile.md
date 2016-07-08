@@ -1,6 +1,5 @@
 # 移动端支持
 
-移动端支持
 
 avalon在[这里](https://github.com/RubyLouvre/avalon/tree/master/src/gesture)提供了几种手势模块, 来满足你的移动开发.
 
