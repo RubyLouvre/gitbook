@@ -9,12 +9,10 @@
         "include-codeblock",
         "tbfed-pagefooter",
         "toggle-chapters",
-        "page-toc"
+        "page-toc",
+        "include"
     ],
     "pluginsConfig": {
-        "layout": {
-            "headerPath": "layouts/header.html"
-        },
         "github": {
             "url": "https://github.com/RubyLouvre"
         },
