@@ -213,5 +213,59 @@ avalon.component('ms-pager', {
 
 ##生命周期
 
+avalon2组件拥有完善的生命周期钩子，方便大家做各种操作。
+
+|  | avalon2| web component | react |
+| -- | -- | -- | -- |
+| 初始化 | onInit | createdCallback | getDefaultProps |
+| 插入DOM树 | onReady | attachedCallback | componentDidMount |
+| 视图变化 | onViewChange | attributeChangedCallback | componentDidUpdate |
+| 移出DOM树 | onDispose | detachedCallback | componentWillUnmount |
+
+
+onInit，这是组件的vm创建完毕就立即调用时，这时它对应的元素节点或虚拟DOM都不存在。只有当这个组件里面不存在子组件或子组件的构造器都加载回来，那么它才开始创建其虚拟DOM。否则原位置上被一个注释节点占着。
+
+onReady，当其虚拟DOM构建完毕，它就生成其真实DOM，并用它插入到DOM树，替换掉那个注释节点。相当于其他框架的attachedCallback， inserted, componentDidMount.
+
+onViewChange，当这个组件或其子孙节点的某些属性值或文本内容发生变化，就会触发它。它是比Web Component的attributeChangedCallback更加给力。
+
+onDispose，当这个组件的元素被移出DOM树，就会执行此回调，它会移除相应的事件，数据与vmodel。
+
 
 ##注意事项
+
+在ms-for循环中，请使用务必指定$id。
+
+## 官方组件集
+
+
+### Promise 
+[mmPromise](https://github.com/RubyLouvre/mmDeferred)
+```
+npm install avalon-promise
+```
+
+### ajax组件 
+[mmRequest](https://github.com/RubyLouvre/mmRequest)
+```
+npm install mmPequest
+```
+
+### 动画组件 
+虽然avalon2已经拥有ms-effect指令,但那是基于CSS3的,在IE6-8下是需要JS库来支持
+[mmAnimate](https://github.com/RubyLouvre/mmAnimate)
+```
+npm install mmAnimate
+```
+
+### 弹窗组件 
+[ms-modal](https://github.com/RubyLouvre/ms-modal)
+```
+npm install ms-modal
+```
+
+### 分页组件 
+[ms-pager](https://github.com/RubyLouvre/ms-pager)
+```
+npm install ms-pager
+```
