@@ -32,5 +32,5 @@
 * [移动端支持](mobile.md)
 * [常见问题](questions.md)
 * [API](api.md)
-* 更新日志
+* [更新日志](log.md)
 
