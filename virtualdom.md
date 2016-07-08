@@ -16,11 +16,8 @@ IE6-7会对colgroup, dd, dt, li, options, p, td, tfoot, th, thead, tr元素自�
 并将它们的之间的元素放到一个数组中(表明它们是循环区域)
 并去掉所有只有空白的文本节点
 
-第3个阶段,优化,对拥有ms-*属性的虚拟DOM添加dynamic属性
-表明它以后要保持其对应的真实节点
-并对没有`ms-*`属性的元素添加skipAttrs属性,表明以后不需要遍历其属性
-如果它的子孙没有`ms-*`或`{{ }}`插值表达式或ms-自定义元素,那么还加上skipContent
-表明以后不要遍历其孩子.
+第3个阶段,优化,对拥有`ms-*`属性的虚拟DOM添加dynamic属性
+表明它以后要保持其对应的真实节点,并对没有`ms-*`属性的元素添加skipAttrs属性,表明以后不需要遍历其属性。 如果它的子孙没有`ms-*`或插值表达式或ms-自定义元素,那么还加上skipContent，表明以后不要遍历其孩子.
 
 这三个属性,dynamic用于节点对齐算法,skipAttrs与skipContent用于diff算法
 
