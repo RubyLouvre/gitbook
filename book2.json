@@ -9,13 +9,18 @@
          "emphasize",
          "include-codeblock",
          "tbfed-pagefooter",
-         "toggle-chapters"
+         "toggle-chapters",
+         "atoc",
     ],
     "pluginsConfig": {
         "layout":{
            "headerPath" : "layouts/header.html"
          },
-        "github": {
+         "atoc": {
+            "addClass": true,
+            "className": "atoc"
+         },
+         "github": {
            "url": "https://github.com/RubyLouvre"
         },
          "tbfed-pagefooter": {
