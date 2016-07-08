@@ -12,6 +12,13 @@
         "atoc"
     ],
     "pluginsConfig": {
+         "layout":{
+           "headerPath" : "layouts/header.html"
+         },
+         "atoc": {
+            "addClass": true,
+            "className": "atoc"
+         },
         "github": {
             "url": "https://github.com/RubyLouvre"
         },
