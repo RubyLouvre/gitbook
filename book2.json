@@ -1,0 +1,27 @@
+{
+    "plugins": [
+        "header",
+        "betterchinese",
+        "page-toc",
+        "splitter",
+         "advanced-emoji",
+         "github" ,
+         "emphasize",
+         "include-codeblock",
+         "tbfed-pagefooter",
+         "toggle-chapters"
+    ],
+    "pluginsConfig": {
+        "layout":{
+           "headerPath" : "layouts/header.html"
+         },
+        "github": {
+           "url": "https://github.com/RubyLouvre"
+        },
+         "tbfed-pagefooter": {
+            "copyright":"Copyright &copy; 司徒正 2016－2016",
+            "modify_label": "该文件修订时间：",
+            "modify_format": "YYYY-MM-DD HH:mm:ss"
+       }
+    }
+}
