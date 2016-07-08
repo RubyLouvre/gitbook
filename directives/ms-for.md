@@ -75,3 +75,31 @@ vm.array = [{arr: [111,222, 333]},{arr: [111,222, 333]},{arr: [111,222, 333]}]
     <li ms-for="el in @array"><div ms-for='elem in el.arr'>{{elem}}</div></li>
 </ul>
 ```
+
+**如何双向绑定ms-for中生成的变量?**
+
+由于 循环生成的变量前面不带@, 因此就找不到其对应的属性,需要特别处理一下
+
+```
+<div ms-controller="test">
+<div ms-for="(key,el) in @styles">
+        <label>{{ key }}::{{ el }}</label>
+        <input type="text" ms-duplex="@styles[key]" >
+        <!--不能ms-duplex="el"-->
+    </div>
+</div>
+
+<script type="text/javascript">
+    var root = avalon.define({
+        $id: "test",
+        styles: {
+            width: 200,
+            height: 200,
+            borderWidth: 1,
+            borderColor: "red",
+            borderStyle: "solid",
+            backgroundColor: "gray"
+        }
+    })
+</script>
+```
