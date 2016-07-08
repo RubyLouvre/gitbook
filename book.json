@@ -8,7 +8,9 @@
         "emphasize",
         "include-codeblock",
         "tbfed-pagefooter",
-        "toggle-chapters"
+        "toggle-chapters",
+        "layout",
+        "page-toc"
     ],
     "pluginsConfig": {
         "github": {
