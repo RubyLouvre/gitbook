@@ -11,7 +11,8 @@
         "toggle-chapters",
         "page-toc",
         "include",
-        "style"
+        "style",
+        "toolbar"
     ],
     "pluginsConfig": {
         "github": {
