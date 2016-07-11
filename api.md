@@ -16,10 +16,16 @@
 1. 元素节点
 
 ```javascript
-avalon.scan(document.body)
-vm.$watch('onReady', function(){
-    //页面上每个ms-controller, ms-important元素
-    //在其区域内的所有ms-*指令被扫描后会执行
+avalon.ready(function(){
+    avalon.define({
+       $id: 'test',
+       aaa: 111
+    })
+    avalon.scan(document.body)
+    vm.$watch('onReady', function(){
+        //页面上每个ms-controller, ms-important元素
+        //在其区域内的所有ms-*指令被扫描后会执行
+    })
 })
 ```
 >onReady回调,在2.1.0新加入,只会调用一次!
