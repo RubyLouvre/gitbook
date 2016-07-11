@@ -18,7 +18,7 @@
 具体用法详见双工绑定
 
 ```html
-<input ms-duplex-number='@aaa | debounce(200)'>{{@aaa}}
+<input ms-duplex-number='@aaa'>{{@aaa}}
 ```         
 我们也可以自定义类型转换器, 直接在avalon.parser上添加
 ```javascript
