@@ -118,6 +118,10 @@ setTimeout(function(){
 </html>
 ```
 
+## 页面用了avalon后,元素之间的display:inline-block的距离没了
+
+答: 因为avalon在页面加载好后,会清掉所有空白文本,减少页面的节点数,从而减少以后diff的节点个数. 详见[这里](virtualdom.md).
+
 ## 组件的注意事项 ##
 
 `答`: 最好指定全局不重复的$id,特别在ms-for循环中,必须指定$id
