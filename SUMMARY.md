@@ -6,7 +6,7 @@
    * [vm](vm.md)
    * [虚拟DOM](virtualdom.md)
 * [指令](directive.md)
-   * [插值表达式](expr.md)
+   * [插值表达式](directives/expr.md)
    * [ms-skip](directives/ms-skip.md)
    * [ms-controller](directives/ms-controller.md)
    * [ms-important](directives/ms-important.md)

@@ -90,10 +90,10 @@ QQ学习群: 314247255
 
 这里面涉及一些知识点
 
-1. vm,使用avalon.define方法生成,必须带$id属性
-2. 指令,以ms-开头的属性及双花括号的插值表达式
-3. 圈定作用域,使用ms-controller告诉框架,只处理这个范围内的标签
-4. 引导符,使用@来告诉框架这些变量是来自vm的
+1. vm,使用[avalon.define](api.md#define)方法生成,必须带$id属性
+2. 指令,以ms-开头的属性及双花括号的[插值表达式](directives/expr.md)
+3. 圈定作用域,使用[ms-controller](directives/controller.md)告诉框架,只处理这个范围内的标签
+4. 引导符,使用`@`或`##`来告诉框架这些变量是来自vm的
 5. [自动扫描机制](api.md#scan)
 
 ## avalon起源

@@ -72,7 +72,7 @@ setTimeout(function () {
 
 VM中的数据更新，只能通过 = 赋值方式实现。但要注意在IE6-8，由于VM是一个VBScript对象，为VM添加新属性会抛错， 因此我们想批量更新属性要时格外小心了，需要用hasOwnProperty进行过滤。
 
-{% em color="red" %}注意在IE6-8 下，err是VBscript的关键字，VM中存在这个字段，就会将VM中的其他数组变成字符串，详见[这里](https://github.com/RubyLouvre/avalon/issues/627) {% endem %}
+{% em color="#0088a4" %}注意在IE6-8 下，err是VBscript的关键字，VM中存在这个字段，就会将VM中的其他数组变成字符串，详见[这里](https://github.com/RubyLouvre/avalon/issues/627) {% endem %}
 
 >为了性能起见，请确保你的对象结构足够扁平，套嵌层次不能太深，里面的数组不能太长。
 
@@ -240,7 +240,7 @@ avalon之所以使用Proxy, Object.defineProperty或VBScript来构造vm，那是
 对于Object.defineProperty或VBScript，主要是靠将普通属性变成访问器属性。访问器属性内部是拥有两个方法，setter与getter。当用户读取对象的属性时，就将调用其getter方法，当用户为此属性赋值时，就会调用setter方法。因此，我们就不需要像angular那样，使用脏检测，就得知对象被修改了某些属性了。并且能准确得知那些属性，及时地同步视图的相应区域，实现最小化刷新视图。
 
 
-对于Proxy(智能对象)，这最早发迹于firefox4，现在许多新浏览器都支持，它能监听外部用户对它的14种，比如说读写属性，调用方法，删除旧属性，添加新属性，被for in循环， 被in关键字进行存在性检测， 被new……因此之前所说的，不能监听没预先定义的属性， 这个难题被Proxy搞定了。
+对于Proxy(智能代理)，这最早发迹于firefox4，现在许多新浏览器都支持，它能监听外部用户对它的14种，比如说读写属性，调用方法，删除旧属性，添加新属性，被for in循环， 被in关键字进行存在性检测， 被new……因此之前所说的，不能监听没预先定义的属性， 这个难题被Proxy搞定了。
 
 当我们得知vm的属性发生变化了，如何更新视图呢？在avalon2中，这个是由[虚拟DOM](virtualdom.md)来处理。
 
