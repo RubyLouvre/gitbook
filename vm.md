@@ -96,6 +96,23 @@ VM中的数据更新，只能通过 = 赋值方式实现。但要注意在IE6-8�
 6. ensure(el)，只有当数组不存在此元素时，只添加此元素。
 7. set(index, el)，用于更新某一索引位置中的元素，因为简单数组元素的数组，是不会转换它的元素。
 
+
+```html
+<body ms-controller="test">
+    <div ms-for="el in @arr">
+        {{el}}<button type="button" ms-click="@arr.remove(el)">点我删除该行</button>
+    </div>
+    <script>
+    avalon.define({
+        $id: 'test',
+        arr: [1,2,3,4,5,6]
+    })
+    </script>
+</body>
+
+```
+
+
 ##非监控属性
 
 这包括框架添加的$id, $events, $model属性, $fire, $watch, $render方法， 及用户自己设置的以$开头的属性，放在$skipArray数组中的属性，值为函数、各种DOM节点的属性， 总之，改变它们的值不会产生同步视图的效果。

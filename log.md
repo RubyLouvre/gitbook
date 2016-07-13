@@ -2,7 +2,7 @@
 
 ## 2.1.6
 
-{% em color="#b20000" %}**全新的lexer与插值表达式抽取方法**{% endem %}
+{% em color="#ffafc9" %}**全新的lexer与插值表达式抽取方法**{% endem %}
 
 添加unescapeHTML与escapeHTML方法
 

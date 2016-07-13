@@ -6,10 +6,13 @@
 用于描述HTML,将包括ms-controller/ms-imporant的元素的outerHTML取出来,
 变成对应的vm的render方法, 最终将里面的ms-*或双花括号变成vm中的属性与方法
 
- 注意: 如果你是将vm定义放在jQuery.ready或avalon.ready中必须手动调用这个方法.   
+> 注意: 如果你是将vm定义放在jQuery.ready或avalon.ready中必须手动调用这个方法.   
  
  
- 注意: avalon2不会像avalon1那样将ms-*属性去掉了
+> 注意: avalon2不会像avalon1那样将ms-*属性去掉了
+
+> 注意: avalon不能扫描iframe的内容
+
 
 
 有两个参数

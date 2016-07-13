@@ -47,6 +47,28 @@ ms-duplex='@aaa | debounce(300)'
 
 除此之后，ms-duplex还有一个回调，data-duplex-changed，用于与事件绑定一样， 默认第一个参数为事件对象。如果传入多个参数，那么使用$event为事件对象占位。
 
+<fieldset>
+<legend>**如何同步数据?**</legend>
+
+```
+现行可以供avalon操作的的HTML4表单元素有
+text, textarea, password, radio, checkbox, select及其他， 
+其中select根据multiple属性分为单选下拉框，多选下拉框
+```
+
+`text, textarea, password`比较简单，直接取其value属性同步就行了
+
+`radio与checkbox`就需分情况讨论，如果用户就想根据此元素是否被勾选进行操作，
+那么就需要用ms-duplex-checked，否则使用ms-duplex
+
+`checkbox`在其指令不是ms-duplex-checked时,是返回一个数组
+
+`select`的值其实就是被选中的option的value值或text值。
+但select为多选下拉框时，与checkbox一样，是显示一组的东西，
+因此它们需要在VM中对应的一个数组
+</fieldset>
+
+
 现在我们来一些实际的例子!
 
 ###全选与非全选
