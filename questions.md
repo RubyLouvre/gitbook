@@ -60,6 +60,32 @@ vm.$watch('onReady', function(){
 ```
 [详见API文档页](http://avalonjs.coding.me/cn/api.html#scan)
 
+## 对表单元素的值输入进行限制
+
+`答`: avalon提供了4个转换器,那是将value值上传到vm时用,也提供了许多格式式过滤器,
+但在ms-duplex格式化很容易死循环,因此建议在另加input事件做处理.
+
+比如说我们限制只能输入数字
+```html
+<script>
+    avalon.define({
+        $id: 'test',
+        aaa: 111,
+        fix: function(e){
+            e.target.value = e.target.value.replace(/\D+/, '')
+        }
+    })
+
+</script>
+
+<body :controller="test">
+    <input :duplex-number="@aaa" :input="@fix"/>{{@aaa}}
+</body>
+
+
+```
+
+
 ## 如果手动执行验证 ##
 
 `答`: ms-validate提供了各种全自动的验证.但可能大家需要手动执行验证表单
@@ -118,7 +144,7 @@ setTimeout(function(){
 </html>
 ```
 
-## 页面用了avalon后,元素之间的display:inline-block的距离没了
+## 页面用了avalon后, 元素间没有距离了
 
 答: 因为avalon在页面加载好后,会清掉所有空白文本,减少页面的节点数,从而减少以后diff的节点个数. 详见[这里](virtualdom.md).
 

@@ -68,7 +68,6 @@ avalon2 的默认配置项比avalon1.5 少许多。所有组件通用的配置�
 
 * is, 字符串, 指定组件的类型。如果你使用了自定义标签，这个还可以省去。
 
-
 * $id, 字符串, 指定组件vm的$id，这是可选项。如果该组件是位于SPA的子页里面，也请务必指定此配置项，能大大提高性能。
 
 * define, 函数, 自己决定如何创建vm，这是可选项。
@@ -139,7 +138,9 @@ template:'<div class="com"><div ms-html="@content1"></div>'+
     }
 })
 ```
-那么我们就得在外面的vm中添加三个属性, 在JS中写长长的HTML……显然这是非常不方便编写与维护。从阅读代码的角度来看，这样的属性，其实放在HTML页面上会更好。本来JS就应该与JS呆在一起，而HTML也应该与HTML在一块。插槽元素的出现，为我们解决这难题。
+那么我们就得在外面的vm中添加三个属性, 在JS中写长长的HTML……显然这是非常不方便编写与维护。
+从阅读代码的角度来看，这样的属性，其实放在HTML页面上会更好。本来JS就应该与JS呆在一起，
+而HTML也应该与HTML在一块。插槽元素的出现，为我们解决这难题。
 
 
 slot元素拥有一个可选的name属性，并且允许多个slot元素拥有同一个name值。
@@ -154,9 +155,11 @@ var slots = {
   // D,E slot元素没有指定name属性,默认为default
 }
 ```
-然后我们在外面使用时, 为自定义标签添加一些子节点, 让它们带有slot属性, 当它们的属性值与 定义时的slot元素的name值一致,就会进行替换操作.从而解决传入大片HTML参数的问题.
+然后我们在组件容器中添加一些元素节点, 让它们带有slot属性, 
+当它们的属性值与 定义时的slot元素的name值一致,就会进行替换操作.从而解决传入大片HTML参数的问题.
 ![](dom-insert.png)
-如果我们只有一个插入点,并且不想自定义标签内部再写带slot属性的元素, 这时可以使用soloSlot配置项.这时整个innerHTML都默认为soloSlot值的插入点
+如果我们只有一个插入点,并且不想自定义标签内部再写带slot属性的元素, 
+这时可以使用soloSlot配置项.这时整个innerHTML都默认为soloSlot值的插入点
 ```html
 <!DOCTYPE html>
 <html>
@@ -186,6 +189,153 @@ var slots = {
 </body>
 </html>
 ```
+
+
+###slot机制的内部实现
+
+插槽元素有两种
+
+第一种是没有name的slot元素, 它要求在组件定义时指定soleSlot配置项, 为简单起见.我们称之为soleSlot元素.
+当指定了soleSlot元素,就不能指定其他slot元素.
+
+第二种是指定了name的slot元素,它们可以重名,也可以不重名.重名,对应的属性值会变成一个数组.
+
+
+先说soleSlot元素，那么你在页面上定义的组件容器(wbr, xmp, template, ms-元素)的内部都是soleSlot的内容，
+里面所有东西都会被成一个html字符串
+
+举例说，最简单的ms-button组件
+
+```javascript
+avalon.component('ms-button', {
+    template: '<button type="button"><span><slot /></span></button>',
+    defaults: {
+        buttonText: "button"
+    },
+    soleSlot: 'buttonText'
+})
+
+```
+
+它的template其实会翻译成
+```html
+<button type="button"><span ms-html="##buttonText"></span></button>
+```
+　
+如果外面是这样调用
+
+```html
+<ms-button><b>xxx</b><span class="icon"></span><ms-button>
+```
+
+组件vm的buttonText属性会被赋值 
+```javascript
+vm.buttonText = '<b>xxx</b><span class="icon"></span>'
+```
+
+但你是这样调用
+```html
+<wbr :widget="{is: 'ms-button'}" />
+<xmp :widget="{is: 'ms-button'}" ></xmp>
+<ms-button ></ms-button>
+```
+
+容器元素没有节点，或只是空白，vm.buttonText是不会被赋值，还是使用默认的button
+
+第二种情况，存在多个slot元素
+
+```javascript
+avalon.component('ms-dialog', {
+                template: heredoc(function () {
+                    /*
+                     <div class="dialog">
+                     <slot name='header'/>
+                     <slot name='body'/>
+                     <slot name='footer'/>
+                     </div>
+                     */
+                }),
+                defaults: {
+                    header: '<div>header</div>',
+                    body: '<div>body</div>',
+                    footer: '<div>footer</div>'
+                }
+            })
+```
+
+传参是这样的
+
+```html
+<ms-dialog :widget="[{$id:'aaa'}]">
+        <div slot="header" >面板1</div>
+        <div slot="body" >面板2</div>
+        <div slot="footer" >面板3</div>
+</ms-dialog>
+```
+那么组件VM是变成这样
+```html
+ header: '<div>面板1</div>',
+  body: '<div>面板2</div>',
+ footer: '<div>面板3</div>'
+```
+
+此外，你还可以在组件的template中不写slot元素，只是在外面组件容器里面加slot属性
+因为添加了slot元素或在组件中指定了soleSlot会改变原来template的构造。反之，则是直接根据你的template来构造组件的渲染函数。
+
+如ms-tabs，它无法预知panels面板以后会加多少个，因此它会在组件容器中先放三个，以后再加面板，可以直接 vm.panels.push(" new Panel")
+
+>组件容器存在多个同名的slot，它们就变成一个字符串数组，只有一个则是字符串。
+
+
+```javascript
+avalon.component('ms-tabs', {
+    template: heredoc(funcion(){
+/*
+<div class="ms-tabs">
+    <ul class="ms-tabs-buttons">
+        <li class="ms-tabs-button" 
+            :for="($index,el) in @triggers"
+            :class="[$index === @selectedIndex && 'active']"
+            :click="@cbProxy($event,$index)">{{el}}</li>
+    </ul>
+    <div class="ms-tabs-panels">
+        <div class="ms-tabs-panel" 
+             :for="($index, el) in @panels" 
+             :visible="$index === @selectedIndex"
+             :html="el"
+             ></div>
+    </div>
+</div>
+*/
+   }),
+    defaults: {
+        triggers: [111, 222, 333],
+        panels: [],
+        selectedIndex: 0,
+        cbProxy: function (e, i) {
+            if (typeof this.onSwitch === 'function') {
+                var ret = this.onSwitch(e, i)
+            }
+            if (ret !== false) {
+                this.selectedIndex = i
+            }
+        }
+    }
+})
+
+```
+
+```html
+<ms-tabs ms-widget="[{$id:'aaa'}]">
+        <div slot="panels" >
+            <p>这次的实验对师兄打击很大，也让他能够真正地静下来去思考自己的人生，他说不想再那么痛苦地强撑，也不必给自己如此大的压力，开始重新规划自己未来的道路。</p></div>
+        <div slot="panels" ><p>不过，像《青年文摘》《读者》等流行读物，我们是应该看，但最好只把它当做获得资讯的方式，不要把它们当成你全部的阅读，不然，你会变得很肤浅。</p>
+        </div>
+        <div slot="panels" ><p>鼹鼠的土豆在她的豆瓣上说：我送书的时候没有人要，我送荔枝，一会就抢光了。</p>
+          </div>
+    </ms-tabs>
+```
+这样vm.panels就会被一个html数组所重写
 ##组件定义
 
 avalon定义组件时是使用avalon.component方法。

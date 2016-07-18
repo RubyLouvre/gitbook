@@ -11,6 +11,8 @@ ms-important的元素节点下面的其他节点也可以使用[ms-controller](m
 
 ms-important这特性有利协作开发,每个人的VM都不会影响其他人,并能大大提高性能
 
+{% em color="#ffb515" %}ms-important只能用于ms-controller的元素里面{% endem %}
+
 ```html
   <div ms-important='aaa'>
       <div ms-controller='ccc'>
