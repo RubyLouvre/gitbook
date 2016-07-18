@@ -182,3 +182,19 @@ setTimeout(function(){
 </body>
 </html>
 ```
+
+## 为什么我的日期不能同步
+```javascript
+var vm = avalon.define({
+  $id:'aaa',
+  date: new Date
+})
+
+setTimeout(function(){
+  vm.date = new Date
+}, 1000)
+
+```
+
+`答`: 因为avalon只会对number, string, boolean, 纯对象, 纯数组这几个类型同步, 其他类型需要转换.
+将上面的`new Date`改成`new Date - 0`即可

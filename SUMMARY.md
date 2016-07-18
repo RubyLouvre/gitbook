@@ -33,6 +33,7 @@
 * [配置](config.md)
 * [移动端支持](mobile.md)
 * [常见问题](questions.md)
+* [与jQuery共存](jquery.md)
 * [API](api.md)
 * [更新日志](log.md)
 
