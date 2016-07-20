@@ -336,6 +336,8 @@ avalon.component('ms-tabs', {
     </ms-tabs>
 ```
 这样vm.panels就会被一个html数组所重写
+
+属于数值驱动的通过`ms-widget`传入，属于`html内容`的使用slot，除非你的内容只是一句字符串。
 ##组件定义
 
 avalon定义组件时是使用avalon.component方法。

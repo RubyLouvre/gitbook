@@ -12,12 +12,15 @@ var tap = require('../tap')
 ```
 使用时
 
-```
+```html
 <div ms-on-tap="@tapfn">点我</div>
 ```
 > 当你使用tap模块,请把tap与recognizer.js模块放在同一文件夹下.
 
 > drag, pinch, press, rotate, swipe, tap都依赖于recongizer模块.
+
+
+具体教程可以看[这里](https://segmentfault.com/a/1190000006012676)
 
 **drag模块**：在指定的dom区域内，一个手指放下并移动事件，即触屏中的拖动事件。这个事件在屏触开发中比较常用，如：左拖动、右拖动等. 如手要上使用QQ时向右滑动出现功能菜单的效果。具体事件有： 
 1. dragstart：拖动开始 

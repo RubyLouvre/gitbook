@@ -78,14 +78,21 @@ QQ学习群: 314247255
         <script>
             var vm = avalon.define({
                 $id: "test",
-                name: "司徒正美"
+                name: "司徒正美",
+                array: [11,22,33]
             })
+            setTimeout(function(){
+               vm.array.set(0, 444)
+            }, 3000)
         </script>
     </head>
 
     <body ms-controller="test">
         <input ms-duplex="@name">
         <p>Hello,{{@name}}!</p>
+        <ul>
+           <li ms-for="($index,el) in @array">{{$index}}--{{el}}</li>
+        </ul>
     </body>
 </html>
 ```
@@ -97,6 +104,17 @@ QQ学习群: 314247255
 3. 圈定作用域,使用[ms-controller](directives/controller.md)告诉框架,只处理这个范围内的标签
 4. 引导符,使用`@`或`##`来告诉框架这些变量是来自vm的
 5. [自动扫描机制](api.md#scan)
+
+avalon2.1.15后还可以使用`:xxxx`短指令.
+```html
+<body :controller="test">
+    <input :duplex="@name">
+    <p>Hello,{{@name}}!</p>
+    <ul>
+       <li :for="($index,el) in @array">{{$index}}--{{el}}</li>
+    </ul>
+</body>
+```
 
 ## avalon起源
 ----------------------

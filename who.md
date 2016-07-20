@@ -23,10 +23,27 @@
 <!--[if lt IE 8]><span></span><![endif]--></a></li>
 <!--for631075401544-->
 
+
 <li><a  target="_blank" href="http://tuiguang.baidu.com">
 <img  src="styles/logos/baidutuiguang.jpeg">
 <!--[if lt IE 8]><span></span><![endif]--></a></li>
 <!--for631075401544-->
+
+<li><a  target="_blank" href="http://www.4008-197-197.com/">
+<img  src="styles/logos/yos.png">
+<!--[if lt IE 8]><span></span><![endif]--></a></li>
+<!--for631075401544-->
+
+<li><a target="_blank" href="http://www.sohu.com/">
+<img src="styles/logos/sohulogo.png">
+<!--[if lt IE 8]><span></span><![endif]--></a></li>
+<!--for631075401544-->
+
+<li><a target="_blank" href="http://ebooking.elong.com/">
+<img src="styles/logos/elong.png">
+<!--[if lt IE 8]><span></span><![endif]--></a></li>
+<!--for631075401544-->
+
 
 <li><a  target="_blank" href="http://www.bianfeng.com/">
 <img  src="styles/logos/bianfeng.png">
@@ -64,10 +81,6 @@
 <!--[if lt IE 8]><span></span><![endif]--></a></li>
 <!--for631075401544-->
 
-<li><a target="_blank" href="http://www.sohu.com/">
-<img src="styles/logos/sohulogo.png">
-<!--[if lt IE 8]><span></span><![endif]--></a></li>
-<!--for631075401544-->
 
 <li><a target="_blank" href="http://www.ustack.com/">
 <img src="styles/logos/ustack.png">

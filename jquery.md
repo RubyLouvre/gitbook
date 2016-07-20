@@ -27,15 +27,17 @@ jQuery.ajax({
 ```
 
 提交VM中的某个`对象`属性
+
 ```javascript
 data: JSON.parse(JSON.stringify(vm.data.$model))
-
 ``
+
 提交VM中的某个`数组`属性
+
 ```javascript
 data: JSON.parse(JSON.stringify(vm.data.$model))
 
-``
+```
 
 
 ## 如何让后台回来的数据更新VM
