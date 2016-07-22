@@ -16,3 +16,14 @@ vm.obj = {width: 200, height: 300}
 <span ms-css="@array">直接引用数组</span>
 <span ms-css="[@obj1, @obj2, (@toggle ? @obj3: @obj4)]">使用数组字面量,里面可以用三元运算符</span>
 ```
+需要注意的是 设置背景图片是比较复杂
+```html
+
+<span ms-css="{background: 'url('+@imageUrl + ') no-repeat center center;'}">图片</span>
+
+<span ms-css="{backgroundImage: 'url('+@imageUrl + ')'}">图片</span>
+
+
+```
+
+
