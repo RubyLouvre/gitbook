@@ -19,7 +19,7 @@
 数据格式化是放在属性值时，以过滤器形式存在，如
 ```javascript
 ms-duplex='@aaa | uppercase'
-ms-duplex='@aaa | date('YYYY:MM:dd')'
+ms-duplex='@aaa | date('yyyy:MM:dd')'
 ```
 
 此外还存在两个控制同步时机的过滤器，change与debounce。

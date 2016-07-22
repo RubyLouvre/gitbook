@@ -159,7 +159,7 @@ var slots = {
 当它们的属性值与 定义时的slot元素的name值一致,就会进行替换操作.从而解决传入大片HTML参数的问题.
 ![](dom-insert.png)
 如果我们只有一个插入点,并且不想自定义标签内部再写带slot属性的元素, 
-这时可以使用soloSlot配置项.这时整个innerHTML都默认为soloSlot值的插入点
+这时可以使用soleSlot配置项.这时整个innerHTML都默认为soleSlot值的插入点
 ```html
 <!DOCTYPE html>
 <html>
@@ -405,6 +405,15 @@ npm install avalon-promise
 ```
 npm install mmPequest
 ```
+### redux事件派发组件 
+[mmDux](https://github.com/RubyLouvre/mmDux)
+```
+npm install mmDux
+```
+
+### 路由组件
+[mmRouter](https://github.com/RubyLouvre/mmRouter)
+
 
 ### 动画组件 
 虽然avalon2已经拥有ms-effect指令,但那是基于CSS3的,在IE6-8下是需要JS库来支持
@@ -423,4 +432,10 @@ npm install ms-modal
 [ms-pager](https://github.com/RubyLouvre/ms-pager)
 ```
 npm install ms-pager
+```
+
+### 切换卡组件 
+[ms-tabs](https://github.com/RubyLouvre/ms-tabs)
+```
+npm install ms-tabs
 ```
