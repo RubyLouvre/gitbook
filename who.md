@@ -44,6 +44,15 @@
 <!--[if lt IE 8]><span></span><![endif]--></a></li>
 <!--for631075401544-->
 
+<li><a target="_blank" href="http://www.bilibili.com/">
+<img src="styles/logos/bilibili.png">
+<!--[if lt IE 8]><span></span><![endif]--></a></li>
+<!--for631075401544-->
+
+<li><a  target="_blank" href="http://www.xiaojukeji.com/">
+<img src="styles/logos/xiaojukeji.png">
+<!--[if lt IE 8]><span></span><![endif]--></a></li>
+<!--for631075401544-->
 
 <li><a  target="_blank" href="http://www.bianfeng.com/">
 <img  src="styles/logos/bianfeng.png">
@@ -97,11 +106,6 @@
 <!--[if lt IE 8]><span></span><![endif]--></a></li>
 <!--for631075401544-->
 
-
-<li><a  target="_blank" href="http://www.xiaojukeji.com/website/index.html">
-<img src="styles/logos/xiaojukeji.png">
-<!--[if lt IE 8]><span></span><![endif]--></a></li>
-<!--for631075401544-->
 
 <li><a  target="_blank" href="http://www.isoftstone.com/cn/industries/insurance.aspx?id=insurance">
 <img  src="styles/logos/isoftstone.png">

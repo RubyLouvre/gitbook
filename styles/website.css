@@ -49,11 +49,11 @@
 
 .logos li{
     float: left;
-    width: 140px;
-    height: 140px;
-    line-height: 140px;
+    width: 100px;
+    height: 100px;
+    line-height: 100px;
     overflow: hidden;
-    margin: 24px;
+    margin: 8px;
     text-align:center;
     background: #fff;
     border-radius: 10px;
@@ -80,6 +80,7 @@
     width: 120px;
 }
 .logos li a{
+    border: 3px solid #1ba9ba;
     display: inline-block;
     width: 100%;
     height: 100%;
@@ -99,13 +100,13 @@
     padding: 5px 0;
     color: rgba(255, 255, 255, 0.6);
     text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
-    background-color: #1ba9ba;
+  /*  background-color: #1ba9ba;
     background-image: -webkit-gradient(linear, left top, left bottom, from(#0088a4), to(#1ba9ba));
     background-image: -webkit-linear-gradient(top, #0088a4 0, #1ba9ba 100%);
     background-image: -o-linear-gradient(top, #0088a4 0, #1ba9ba 100%);
     background-image: linear-gradient(to bottom, #0088a4 0, #1ba9ba 100%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#0088a4', endColorstr='#1ba9ba', GradientType=0);
-    background-repeat: repeat-x;
+    background-repeat: repeat-x;*/
 
 }
 .jumbotron:after{
