@@ -11,20 +11,20 @@ HTML绑定类似于文本绑定,能将一个元素清空,填上你需要的内�
 
 
 我们可以通过ms-html异步加载大片内容。
-
-```javascript
+```html
+<body :controller="test">
+<script>
 var vm = avalon.define({
   $id: "test",
   aaa: "loading..."
 })
-
 jQuery.ajax({
    url:'action.do',
    success: function(data){
       vm.aaa = data.html
    }
 })
-```
-```html
-<div ms-controller="test" ms-html="@aaa"></div>
+</script>
+<div ms-html="@aaa"></div>
+</body>
 ```

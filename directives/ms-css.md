@@ -10,19 +10,29 @@ CSS绑定用于为元素节点添加一组样式, 因此要求属性值为对象
 
 
 ```html
-vm.obj = {width: 200, height: 300}
-<span ms-css="@obj">直接引用对象</span>
-<span ms-css="{width: @width, height: @height}">使用对象字面量</span>
-<span ms-css="@array">直接引用数组</span>
-<span ms-css="[@obj1, @obj2, (@toggle ? @obj3: @obj4)]">使用数组字面量,里面可以用三元运算符</span>
+<body ms-controller="test">
+    <script>
+        avalon.define({
+            $id: 'test',
+            obj: {color: 'blur ', 'text-algin': 'center'},//属性名带-,必须用引号括起
+            active: {color: 'red'},
+            width: 111,
+            height:222,
+            toggle: false,
+            array: [{width:1},{height:2}]
+        })
+
+    </script>
+  <span ms-css="@obj">直接引用对象</span>
+  <span :css="{width: @width, height: @height}">使用对象字面量</span>
+  <span :css="@array">直接引用数组</span>
+  <span :css="[@obj1, @toggle && @active ]" :click="@active = !@active">选择性添加多余属性或重写已有属性</span>
+</body>  
 ```
 需要注意的是 设置背景图片是比较复杂
 ```html
-
-<span ms-css="{background: 'url('+@imageUrl + ') no-repeat center center;'}">图片</span>
-
-<span ms-css="{backgroundImage: 'url('+@imageUrl + ')'}">图片</span>
-
+<span :css="{background: 'url('+@imageUrl + ') no-repeat center center;'}">图片</span>
+<span :css="{backgroundImage: 'url('+@imageUrl + ')'}">图片</span>
 
 ```
 

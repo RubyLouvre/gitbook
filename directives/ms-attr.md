@@ -6,11 +6,29 @@
 
 如果键名如果带横杠,请务必转换为驼峰风格或两边加上引号
 
+注意,不能在ms-attr中设置style属性
 ```html
-  vm.obj = {title: 'title', algin: 'left'}
+<p ms-attr="{style:'width:20px'}">这样写是错的,需要用ms-css指令!!</p>
+```
+示例:
+
+```html
+<body ms-controller="test">
+    <script>
+        avalon.define({
+            $id: 'test',
+            obj: {title: '普通 ', algin: 'left'},
+            active: {title: '激活'},
+            width: 111,
+            height:222,
+            toggle: false,
+            array: [{width:1},{height:2}]
+        })
+
+    </script>
   <span ms-attr="@obj">直接引用对象</span>
-  <span ms-attr="{width: @width, height: @height}">使用对象字面量</span>
-  <span ms-attr="@array">直接引用数组</span>
-  <span ms-attr="[@obj1, @obj2, (@toggle ? @obj3: @obj4)]">使用数组字面量,里面可以用三元运算符</span>
-            
+  <span :attr="{width: @width, height: @height}">使用对象字面量</span>
+  <span :attr="@array">直接引用数组</span>
+  <span :attr="[@obj1, @toggle && @active ]" :click="@active = !@active">选择性添加多余属性或重写已有属性</span>
+</body>     
 ```

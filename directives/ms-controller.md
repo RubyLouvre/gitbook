@@ -8,7 +8,10 @@ ms-controller的元素节点下面的其他节点也可以使用ms-controller
 
 当我们在某个指令上用@aaa时,它会先从其最近的ms-controller元素上找, 找不到再往其更上方的ms-controller元素
 ![](controller.png)
-```
+
+
+```html
+<script>
   avalon.define({
       $id: "AAA",
       name: "liger",
@@ -28,9 +31,8 @@ ms-controller的元素节点下面的其他节点也可以使用ms-controller
       $id: "DDD",
       name: "sirenia" //不存在color
 
-  });　　
-```
-```html
+  });　
+</script>
 <div ms-controller="AAA">
     <div>{{@name}} : {{@color}}</div>
     <div ms-controller="BBB">

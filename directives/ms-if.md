@@ -5,5 +5,15 @@
 > `avalon1.*`中ms-if-loop指令已经被废掉,请使用limitBy, selectBy, filterBy过滤器代替相应功能
 
 ```html
-<span ms-if="@toggle" ms-click='@toggle = !@toggle'>点我</span>
+<body :controller="test">
+<script>
+var vm = avalon.define({
+  $id: "test",
+  aaa: "这是被隐藏的内容"
+  toggle: false
+})
+</script>
+<p><button type="button" :click='@toggle = !@toggle'>点我</span></p>
+<div :if="@toggle">{{@aaa}}</div>
+</body>
 ```
