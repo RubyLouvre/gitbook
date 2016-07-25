@@ -18,12 +18,6 @@
 <!--[if lt IE 8]><span></span><![endif]--></a>
 </li><!--for631075401544-->
 
-<li><a  target="_blank" href="javascript:void 0">
-<img  src="styles/logos/market.baidu.jpg">
-<!--[if lt IE 8]><span></span><![endif]--></a></li>
-<!--for631075401544-->
-
-
 <li><a  target="_blank" href="http://tuiguang.baidu.com">
 <img  src="styles/logos/baidutuiguang.jpeg">
 <!--[if lt IE 8]><span></span><![endif]--></a></li>
@@ -31,6 +25,21 @@
 
 <li><a  target="_blank" href="http://www.4008-197-197.com/">
 <img  src="styles/logos/yos.png">
+<!--[if lt IE 8]><span></span><![endif]--></a></li>
+<!--for631075401544-->
+
+<li><a target="_blank" href="http://www.taobao.com/">
+<img src="styles/logos/taobao.png">
+<!--[if lt IE 8]><span></span><![endif]--></a></li>
+<!--for631075401544-->
+
+<li><a target="_blank" href="http://www.10086.cn/gd/index_200_200.html">
+<img src="styles/logos/10086.png">
+<!--[if lt IE 8]><span></span><![endif]--></a></li>
+<!--for631075401544-->
+
+<li><a target="_blank" href="http://cn.unionpay.com/">
+<img src="styles/logos/unionpay.png">
 <!--[if lt IE 8]><span></span><![endif]--></a></li>
 <!--for631075401544-->
 
@@ -76,7 +85,7 @@
 <!--for631075401544-->
 
 <li><a target="_blank" href="http://www.quanshi.com/">
-<img src="styles/logos/quanshi_logo.jpg">
+<img src="styles/logos/quanshi.png">
 <!--[if lt IE 8]><span></span><![endif]--></a></li>
 <!--for631075401544-->
 
