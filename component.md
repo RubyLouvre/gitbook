@@ -61,8 +61,27 @@ xmp, wbr, template
 <template ms-widget='{is:"ms-button"}'></template>
 ```
 
+##组件命名
+
+由于组件名在高级浏览器中,可以作用自定义标签的标签名.而HTML标签在HTML5中有严格的规定
+只能出现 $,-,数字与英文单词, 并且只能以字母开头, 中间必须有'-'.
+
+此外,为了方便avalon辨识这个标签名是否为一个数组,avalon强制规定以ms-开头, 即
+
+> ms-button, ms-date-picker, ms-router-link
+
+但是如果你不用自定义标签声明组件,使用{% em color="#ffafc9" %}ms-widget配置对象{% endem %}
+来声明组件呢, 你就可以突破部分限制, 可以不以`ms-`开头
+
+> logger, date-picker, router-link
+
+```html
+<wbr ms-widget="{is:'texer'}" />
+```
+
+
 ##配置对象
-除了ms-开头的自定义标签不需要指定{% em color="#ffafc9" %}ms-widget配置对象{% endem %}外,其他三种标签都需要指定ms-widget配置对象，并且这个配置对象里必须有is配置项，其值为要生成的组件名。
+除了ms-开头的自定义标签不需 要指定{% em color="#ffafc9" %}ms-widget配置对象{% endem %}外,其他三种标签都需要指定ms-widget配置对象，并且这个配置对象里必须有is配置项，其值为要生成的组件名。
 
 avalon2 的默认配置项比avalon1.5 少许多。所有组件通用的配置项
 
@@ -366,6 +385,22 @@ avalon.component('ms-pager', {
   });  
 ```
 
+
+##渲染真相 
+
+```javascript
+var widgetVTree = widgetName(widgetOptions, slots, getTemplate(template))
+/*
+widgetName: ms-widget中的is配置项或自定义标签的标签名
+widgetOptions: ms-widget配置项
+slots: 各个插槽元素
+getTemplate: 组件定义中getTemplate配置项
+template: 组件定义中template配置项
+widgetVTree:  组件的虚拟DOM,
+*/
+
+```
+
 ##生命周期
 
 avalon2组件拥有完善的生命周期钩子，方便大家做各种操作。
@@ -439,3 +474,5 @@ npm install ms-pager
 ```
 npm install ms-tabs
 ```
+
+更多例子见[这里](https://github.com/RubyLouvre/avalon/tree/master/perf)

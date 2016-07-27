@@ -21,9 +21,7 @@
         },
 
         "scripts": {
-            "files": [
-                "./other.js"
-            ]
+
         },
         "tbfed-pagefooter": {
             "copyright": "Copyright &copy; 司徒正美 2013－2016",

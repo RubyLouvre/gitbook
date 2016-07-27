@@ -26,4 +26,18 @@ vm.validate = {
 }
 ```
 
+onError,onSuccess,onComplete, onValidateAll的第一个参数都是reasons对象,this指向被验证的元素,reason里面有你需要的各种东西.
+```javascript
+var reason = {
+    element: elem,
+    data: field.data,
+    message: elem.getAttribute("data-" + ruleName + "-message") || elem.getAttribute("data-message") || hook.message,
+    validateRule: ruleName,
+    getMessage: getMessage
+}
+```
+
+
+
+
 有关它的详细用法建议看[ms-rules](ms-rules.md)指令

@@ -1,10 +1,127 @@
 #双工绑定
 
-在许多表单应用，我们经常遇到点击一个复选框（或下拉框）会引发旁边的复选框（或下拉框）发生改变， 这种联动效果用avalon来做是非常简单的。因为avalon拥有经典MVVM框架的一大利器，双向绑定！ 绝大部分的指令是从vm单向拍到页面，而双向绑定，则通过监听元素的value值变化，反向同步到vm中。 如果没有这种机制，则需要引入额外的机制(flux云云)来处理此事。
+双工绑定是MVVM框架中最强大的指令.react推崇单向数据流,没有双工绑定,
+那么需要rudex等额外的库来实现相同的功能.
 
-这个指令在1.0中已经不断增强，到2.0， 它的服务对象已经不局限于表单元素，还扩展到可编辑元素（contenteditable＝true）上了。 此外ms-duplex还可以与新加入的ms-validate指令一起使用。因此双工指令是集成数据转换，数据格式化，数据验证， 光标处理4大功能。
+双工绑定只要用于表单元素上.或当一个div设置了contenteditable为true,也可以用ms-duplex指令.
 
-数据转换与之前1.5一样，使用四大转换器
+##各个表单元素的用法
+
+```html
+<body ms-controller="test">
+    <script>
+        avalon.define({
+            $id: 'test',
+            aaa: 'aaa',
+            bbb: 'bbb',
+            ccc: 'ccc'
+        })
+
+    </script>
+
+    <input ms-duplex="@aaa"/>{{@aaa}}
+    <input ms-duplex="@bbb" type="password"/>{{@bbb}}
+    <textarea ms-duplex="@ccc" /></textarea>{{@ccc}}
+</body>
+```
+上面有三个控件,text, password, textarea它们都是属于输入型控件, 只要每为控件敲入一个字符,
+后面的文本都会**立即**变化.那是因为它们默认是绑定oninput事件,如果想控件全部输入好,失去焦点时
+才同步,那么可以使用`change`过滤器
+```html
+<input ms-duplex="@aaa | change"/>{{@aaa}} 
+```
+
+如果你是做智能提示, 控件是绑定了一个AJAX请求与后端不断交互, 使用oninput事件会太频繁,
+使用onchange事件会太迟钝,那么我们可以使用`debounce`过滤器
+```html
+<input ms-duplex="@aaa | debounce(300)"/>{{@aaa}} 
+```
+300ms同步一次.
+
+另外,可编辑元素的用法与过滤器与上面三种控件一样.
+```html
+<div contenteditable="true" ms-duplex="@aaa | debounce(300)"/></div>
+<p>{{@aaa}}</p>
+```
+
+>这两个过滤器只能适用于上面的情况.
+
+此外, 控件还有许多种, 像checkbox, radio,它们的同步机制也不一样.
+```html
+<body ms-controller="test">
+    <script>
+        avalon.define({
+            $id: 'test',
+            aaa: '33',
+            bbb: ['22']
+        })
+
+    </script>
+
+    <input type="radio" value="11"  ms-duplex="@aaa"/>
+    <input type="radio" value="22"  ms-duplex="@aaa"/>
+    <input type="radio" value="33"  ms-duplex="@aaa"/>
+    <input type="checkbox" value="11"  ms-duplex="@bbb"/>
+    <input type="checkbox" value="22"  ms-duplex="@bbb"/>
+    <input type="checkbox" value="33"  ms-duplex="@bbb"/>
+    <p>radio: {{@aaa}}; checkbox:{{@bbb}}</p>
+</body>
+```
+
+checkbox与radio是一点击就会更新.radio要求在vm中为一个简单数据类型数据,字符串,数字或布尔.
+而checkbox则要求是一个数组.并且在最开始时,ms-duplex会令radio钩上其value值等vm属性的控件,
+checkbox则可以勾选多个.如此一来,vm中的属性些总是等于radio与checkbox的属性值.但我们也可以让
+vm的属性值等于此控件的勾选状态,这时需要用上`ms-duplex-checked`转换器.
+
+```html
+<body ms-controller="test">
+    <script>
+        avalon.define({
+            $id: 'test',
+            aaa: false,
+            bbb: false
+        })
+
+    </script>
+    <input type="radio"  ms-duplex-checked="@aaa"/>
+    <input type="checkbox"  ms-duplex-checked="@bbb"/>
+    <p>radio: {{@aaa}}; checkbox:{{@bbb}}</p>
+</body>
+```
+
+最后表单元素还有select控件,它根据其multiple属性分为单选下拉框与复选下拉框,
+其在vm中的值与radio,checkbox一样.即单选时,必须是一个简单数据类型, 复选时为一个数组.
+在最开始时, 当option元素的value值或innerText(不在value值)与数据相同,它们就会被选上.
+```html
+<body ms-controller="test">
+    <script>
+        avalon.define({
+            $id: 'test',
+            aaa: 'bbb'
+            bbb: ['bbb','ccc'],
+        })
+
+    </script>
+    <select :duplex="@aaa"><option>aaa</option><option>bbb</option><option>ccc</option></select>
+    <select multiple="true" :duplex="@bbb"><option>aaa</option><option>bbb</option><option>ccc</option></select>
+</body>
+```
+
+| 控件       | 触发时机           | 数据  |
+| ------------- |:-------------:| -----:|
+| text,password,textarea及可编辑元表 | oninput,onchange, debounce| 简单数据 |
+| radio,checkbox                   | onclick             |  简单数据或数组 |
+| select                           | onchange            |   简单数据或数组 |
+
+##数据转换
+
+上面我们已经提到一个数据转换器ms-duplex-checked了.那只能用于checkbox与radio.
+
+为什么会有这种东西呢?因为无论我们原来的数据类型是什么,跑到表单中都会变成字符串,然后我们通过事件取出来
+它们也是字符串,不会主动变回`原来的类型`.我们需要一种机制保持数据原来的类型,这就是数据转换器.
+
+
+avalon内置了4种过滤器
 
 1. ms-duplex-string="@aaa" 
 2. ms-duplex-number="@aaa" 
@@ -12,9 +129,48 @@
 4. ms-duplex-checked="@aaa"
 
 
-前三个是将元素的value值转换成string, number, boolean（只有为'false'时转换为false）， 最后是根据当前元素（它只能是radio或checkbox）的checked属性值转换为vm对应属性的值。
+前三个是将元素的value值转换成string, number, boolean（只有为'false'时转换为false）
+ 
+最后是根据当前元素（它只能是radio或checkbox）的checked属性值转换为vm对应属性的值。
 
 它们都是放在属性名上。当数据从元素节点往vmodel同步时，转换成预期的数据。
+
+```html
+<input value="11"  ms-duplex-number="@aaa"/>
+```
+
+##数据格式化
+
+一般来说,数据格式化是由过滤器实现的,如
+```html
+<input value="11"  ms-duplex="@aaa | uppercase"/>
+```
+
+但这里有一个隐患,可能导致死循环, 因此建议放在事件回调中实现.
+
+
+```html
+<body ms-controller="test">
+    <script>
+    var vm = avalon.define({
+        $id: 'test',
+        aaa: '111',
+        bbb: '222',
+        format1: function(e){//只能输入数字
+           vm.aaa = e.target.value.replace(/\D/g,'')
+        },
+        format1: function(e){//只能输入数字
+           vm.bbb = avalon.filter.date(e.target.value, 'yyyy-MM-dd')
+        }
+    })
+
+    </script>
+
+    <input :duplex="@aaa" :on-input="@format1"/>{{@aaa}}
+    <input :duplex="@bbb" :on-change="@format2"/>{{@bbb}}
+</body>
+```
+
 
 数据格式化是放在属性值时，以过滤器形式存在，如
 ```javascript
@@ -22,52 +178,31 @@ ms-duplex='@aaa | uppercase'
 ms-duplex='@aaa | date('yyyy:MM:dd')'
 ```
 
-此外还存在两个控制同步时机的过滤器，change与debounce。
 
-change过滤器相当于之前的`data-duplex-event="change"`.
+##数据验证
 
-debounce是对频繁输入进行节流处理。它既不像那oninput事件那样密集（由于使用了虚拟DOM，每一个字符， 都会重新短成一个全新的虚拟DOM树），也不像onchange事件那么滞后。 这在自动元素的suggest组件中非常有用。debounce可以传参，为毫秒数
-
-```javascript
-ms-duplex='@aaa | debounce(300)'
-```
-
-然后是数据验证，这必须在所有表单元素的上方，加上ms-validate才会生效。 这时每个表单元素要加上data-duplex-validator.
+这必须在所有表单元素的上方form元素加上ms-validate指令,
+当前元素加上ms-rules才会生效
 
 ```html
 <form ms-validate="@validation">
 <input ms-duplex='@aaa' 
-       data-validators='require,email,maxlength' 
+       ms-rules='require,email,maxlength' 
        data-maxlength='4' 
        data-maxlength-message='太长了' >
 </form>
 ```
+详见[ms-rules](./ms-rules.md)指令
 
-最后是光标处理，目的是确保光标不会一下子跑到最前还是最后。
+##同步后的回调
 
-除此之后，ms-duplex还有一个回调，data-duplex-changed，用于与事件绑定一样， 默认第一个参数为事件对象。如果传入多个参数，那么使用$event为事件对象占位。
 
-<fieldset>
-<legend>**如何同步数据?**</legend>
-
-```
-现行可以供avalon操作的的HTML4表单元素有
-text, textarea, password, radio, checkbox, select及其他， 
-其中select根据multiple属性分为单选下拉框，多选下拉框
+ms-duplex还有一个回调，data-duplex-changed，用于与事件绑定一样， 默认第一个参数为事件对象。如果传入多个参数，那么使用$event为事件对象占位。
+```html
+<input value="11"  ms-duplex-number="@aaa" data-duplex-changed="@fn"/>
 ```
 
-`text, textarea, password`比较简单，直接取其value属性同步就行了
-
-`radio与checkbox`就需分情况讨论，如果用户就想根据此元素是否被勾选进行操作，
-那么就需要用ms-duplex-checked，否则使用ms-duplex
-
-`checkbox`在其指令不是ms-duplex-checked时,是返回一个数组
-
-`select`的值其实就是被选中的option的value值或text值。
-但select为多选下拉框时，与checkbox一样，是显示一组的东西，
-因此它们需要在VM中对应的一个数组
-</fieldset>
-
+##示例
 
 现在我们来一些实际的例子!
 
