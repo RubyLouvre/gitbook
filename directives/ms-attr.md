@@ -29,6 +29,6 @@
   <span ms-attr="@obj">直接引用对象</span>
   <span :attr="{width: @width, height: @height}">使用对象字面量</span>
   <span :attr="@array">直接引用数组</span>
-  <span :attr="[@obj1, @toggle && @active ]" :click="@active = !@active">选择性添加多余属性或重写已有属性</span>
+  <span :attr="[@obj1, @toggle && @active ]" :click="@toggle = !@toggle">选择性添加多余属性或重写已有属性</span>
 </body>     
 ```
