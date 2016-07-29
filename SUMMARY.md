@@ -18,6 +18,7 @@
    * [ms-active](directives/ms-active.md)
    * [ms-hover](directives/ms-hover.md)
    * [ms-if](directives/ms-if.md)
+   * [ms-visible](directives/ms-visible.md)
    * [ms-for](directives/ms-for.md)
    * [ms-on](ms-on.md)
    * [ms-duplex](directives/ms-duplex.md)
