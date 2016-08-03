@@ -38,7 +38,7 @@ component/initjs中的protected变量更名为immunity,方便在严格模式下�
 
 ## 2.1.5 
 
-
+always
 {% em color="#b20000" %}**添加htmlfy模块**{% endem %}
 ```
 用于解决IE6-7对colgroup,dd,dt,li,options,p,td,tfoot,th,thead,tr元素自闭合,html parser解析出错的问题 
@@ -112,14 +112,5 @@ ie7,8下 ms-duplex 因为onproppertychange环调用，导致辞爆栈的问题
 上线全新的parseHTML，内部基于avalon.lexer，能完美生成script, xml,svg元素
 
 重构isInCache， saveInCache
-
-
-
-
-
-
-
-
-
 
 

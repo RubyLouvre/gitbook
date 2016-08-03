@@ -222,5 +222,10 @@
 <!--[if lt IE 8]><span></span><![endif]--></a></li>
 <!--for631075401544-->
 
+<li><a  target="_blank" href="http://www.aiyuke.com/">
+<img  src="styles/logos/aiyuke.png">
+<!--[if lt IE 8]><span></span><![endif]--></a></li>
+<!--for631075401544-->
+
 <!--ms-for-end:--></ul>
 </div>

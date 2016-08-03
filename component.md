@@ -323,7 +323,7 @@ avalon会先将组件容器转换为一个渲染函数,传入组件VM,成一个�
 请移步到[Github](https://github.com/RubyLouvre/avalon/tree/master/perf/component)
 
 
-## 官方组件集
+## 官方组件或推荐组件
 
 ### Promise 
 [mmPromise](https://github.com/RubyLouvre/mmDeferred)
@@ -332,10 +332,8 @@ npm install avalon-promise
 ```
 
 ### ajax组件 
-[mmRequest](https://github.com/RubyLouvre/mmRequest)
-```
-npm install mmPequest
-```
+[reqwest.js](https://github.com/ded/reqwest)
+
 ### redux事件派发组件 
 [mmDux](https://github.com/RubyLouvre/mmDux)
 ```
@@ -343,14 +341,14 @@ npm install mmDux
 ```
 
 ### 路由组件
-[mmRouter](https://github.com/RubyLouvre/mmRouter)
+[page.js](https://github.com/visionmedia/page.js)
 
 
 ### 动画组件 
-虽然avalon2已经拥有ms-effect指令,但那是基于CSS3的,在IE6-8下是需要JS库来支持
-[mmAnimate](https://github.com/RubyLouvre/mmAnimate)
+[tween.js](https://github.com/tweenjs/tween.js)
 ```
-npm install mmAnimate
+npm install tween.js
+
 ```
 
 ### 弹窗组件 
@@ -365,9 +363,5 @@ npm install ms-modal
 npm install ms-pager
 ```
 
-### 切换卡组件 
-[ms-tabs](https://github.com/RubyLouvre/ms-tabs)
-```
-npm install ms-tabs
-```
+
 

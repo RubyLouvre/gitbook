@@ -1,6 +1,8 @@
 # vm
 
-avalon的所有操作都是围绕vm进行。vm，亦即view model，视图模型。只要我将一个JS对象添加一个$id属性，再放到avalon.define方法里面，就能得到一个vm。
+avalon的所有操作都是围绕vm进行。
+vm，亦即view model，视图模型。只要我将一个JS对象添加一个$id属性，
+再放到avalon.define方法里面，就能得到一个vm。
 
 ```
  var vm = avalon.define({
@@ -24,6 +26,8 @@ avalon定义了的vm，都可以在avalon.vmodels中查看到。我们可以在c
 2. 轻量 一般的对象 {}
 3. 重量 带有访问器属性的对象, avalon VM对象
 4. 超重量 各种节点或window对象
+
+我们构建VM时只充许存在普通对象(不能是某个函数的实例),函数,数组,数字,字符串,布尔,其他一切不支持(undefined与null不能出现在定义VM时,只能用它们来赋值)
 
 ##内部属性
 
