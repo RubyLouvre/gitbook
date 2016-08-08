@@ -85,6 +85,64 @@ avalon内置验证规则有
 	
 	
 在上表还有一个没有提到的东西是如何显示错误信息，这个avalon不帮你处理。但提示信息会帮你拼好，如果你没有写，直接用验证规则的message，否则在元素上找data-message或data-required-message这样的属性。
+```html
+ <!DOCTYPE html>
+<html>
+    <head>
+        <title>ms-validate</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" /> 
+        <script src="../dist/avalon.js"></script>
+        <script>
+            var vm = avalon.define({
+                $id: "test",
+                rules:{required:true,email:true},
+                email:'',
+                validate: {
+                    onError: function (reasons) {
+                        reasons.forEach(function (reason) {
+                            console.log(reason.getMessage())
+                        })
+                    },
+                    onValidateAll: function (reasons) {
+                        if (reasons.length) {
+                            console.log('有表单没有通过')
+                        } else {
+                            console.log('全部通过')
+                        }
+                    }
+                }
+            })
+        </script>
+    </head>
+
+    <body ms-controller="test">
+        <form class="cmxform" ms-validate="@validate" >
+            <fieldset>
+                <legend>验证完整的表单</legend>
+                <p>
+                    <label for="email">Email</label>
+                    <input id="email" 
+                           name="email" 
+                           type="email"
+                           ms-duplex="@email"
+                           ms-rules="@rules" 
+                           data-required-message="请输入"
+                           data-email-message="请输入一个正确的邮箱"
+                           >
+                </p>
+                </fieldset>
+                <p>
+                    <input class="submit" type="submit" value="提交">
+                </p>
+            </fieldset>
+        </form>
+    </body>
+</html>
+
+```
+
+
 
 最后给一个复杂的例子：
 ```html  

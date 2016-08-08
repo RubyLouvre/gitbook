@@ -34,7 +34,7 @@ avalon拥有两大利器，强大的组件化功能以应对**复杂墙**问题�
 ```html
 <xmp ms-widget="{is:'ms-dialog'}">
 <ms-title slot="title">{{@title}}</ms-title>
-<xmp>
+</xmp>
 
 ```
 
@@ -68,7 +68,7 @@ avalon拥有两大利器，强大的组件化功能以应对**复杂墙**问题�
 <div slot="footer">
 <ms-button :widget="@ok" /> <ms-button :widget="@ng" />
 </div>
-<xmp>
+</xmp>
 ```
 
 ##组件命名
@@ -330,9 +330,12 @@ avalon会先将组件容器转换为一个渲染函数,传入组件VM,成一个�
 ```
 npm install avalon-promise
 ```
+[ypromise](https://github.com/yahoo/ypromise/blob/master/promise.js)
+[native-promise-only](https://github.com/getify/native-promise-only/blob/master/lib/npo.src.js)
 
 ### ajax组件 
 [reqwest.js](https://github.com/ded/reqwest)
+[ForbesLindesay/ajax](https://github.com/ForbesLindesay/ajax)
 
 ### redux事件派发组件 
 [mmDux](https://github.com/RubyLouvre/mmDux)
@@ -342,6 +345,7 @@ npm install mmDux
 
 ### 路由组件
 [page.js](https://github.com/visionmedia/page.js)
+[ReactTraining/history](https://github.com/ReactTraining/history)
 
 
 ### 动画组件 

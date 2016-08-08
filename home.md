@@ -8,7 +8,7 @@ avalon2是一款基于虚拟DOM与属性劫持的 迷你、 易用、 高性能 
 
 ## 使用方式
 
-avalon2： https://github.com/RubyLouvre/avalon/tree/2.1.2/dist
+avalon2： https://github.com/RubyLouvre/avalon/tree/2.1.3/dist
 
 CDN: http://www.bootcdn.cn/avalon.js/
 

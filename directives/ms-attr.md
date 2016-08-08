@@ -6,7 +6,7 @@
 
 如果键名如果带横杠,请务必转换为驼峰风格或两边加上引号
 
-注意,不能在ms-attr中设置style属性
+注意,{% em color="red" %}不能在ms-attr中设置style属性{% endem %}
 ```html
 <p ms-attr="{style:'width:20px'}">这样写是错的,需要用ms-css指令!!</p>
 ```
@@ -21,12 +21,14 @@
             active: {title: '激活'},
             width: 111,
             height:222,
+            path: '../aaa/image.jpg'
             toggle: false,
             array: [{width:1},{height:2}]
         })
 
     </script>
   <span ms-attr="@obj">直接引用对象</span>
+  <img ms-attr="{src: @path}" />
   <span :attr="{width: @width, height: @height}">使用对象字面量</span>
   <span :attr="@array">直接引用数组</span>
   <span :attr="[@obj1, @toggle && @active ]" :click="@toggle = !@toggle">选择性添加多余属性或重写已有属性</span>

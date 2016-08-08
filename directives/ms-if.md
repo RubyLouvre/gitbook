@@ -17,3 +17,46 @@ var vm = avalon.define({
 <div :if="@toggle">{{@aaa}}</div>
 </body>
 ```
+
+> 注意,有许多人喜欢用ms-if做非空处理,这是不对的,因此ms-if只是决定它是否插入DOM树与否,ms-if里面的
+**ms-**指令还是会执行.
+
+```javascript
+avalon.define({
+  $id: 'test',
+  aaa: {}
+})
+```
+
+```html
+<div ms-controller="test">
+   <div ms-if="@aaa.bbb">
+     {{@aaa.bbb.ccc}}这里肯定会出错
+   </div>
+</div>
+```
+
+正确的做法是,当你知道这里面有非空判定,需要用方法包起来
+```javascript
+avalon.define({
+  $id: 'test',
+  aaa: {},
+  show: function(aaa, bbb, ccc){
+     var obj = aaa[bbb]
+     if(obj){
+        return obj[ccc]
+     }
+     return ''
+  }
+})
+```
+
+```html
+<div ms-controller="test">
+   <div ms-if="@aaa.bbb">
+     {{@show(@aaa, 'bbb', 'ccc')}}
+   </div>
+</div>
+```
+
+

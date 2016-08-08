@@ -198,3 +198,6 @@ setTimeout(function(){
 
 `答`: 因为avalon只会对number, string, boolean, 纯对象, 纯数组这几个类型同步, 其他类型需要转换.
 将上面的`new Date`改成`new Date - 0`即可
+
+## 如何将页面模块化？
+`答`: https://github.com/RubyLouvre/avalon/issues/1655
