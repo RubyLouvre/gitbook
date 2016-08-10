@@ -132,7 +132,7 @@ avalon使用了一些黑魔法也让旧式IE浏览器支持它。
 我们看一下`ms-view`组件的定义与声明:
 ```javascript
 avalon.component('ms-view',{
-    template:"<div class="view"><slot name="content" /></div>",
+    template:'<div class="view"><slot name="content" /></div>',
     defaults: {
        content: ""
     }
