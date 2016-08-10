@@ -330,10 +330,18 @@ avalon会先将组件容器转换为一个渲染函数,传入组件VM,成一个�
 ```
 npm install avalon-promise
 ```
+[bluebird](https://github.com/petkaantonov/bluebird)
+
 [ypromise](https://github.com/yahoo/ypromise/blob/master/promise.js)
-[native-promise-only](https://github.com/getify/native-promise-only/blob/master/lib/npo.src.js)
 
 ### ajax组件 
+[fetch-polyfill](https://github.com/RubyLouvre/fetch-polyfill)
+```
+npm install fetch-polyfill2
+
+```
+
+
 [reqwest.js](https://github.com/ded/reqwest)
 [ForbesLindesay/ajax](https://github.com/ForbesLindesay/ajax)
 
