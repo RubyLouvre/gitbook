@@ -12,7 +12,10 @@
 ```
 
 使用在ms-controller, ms-important的元素上加上这个ms-controller类名
+```
+<div ms-controller="test" class="ms-controller">{{@aaa}}</div>
 
+```
 ## IE6-8下为vm的数组重新赋给一个新数组失败? ##
 [具体案例](https://github.com/RubyLouvre/avalon/issues/1531)
 ```javascript

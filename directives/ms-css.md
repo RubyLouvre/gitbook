@@ -14,19 +14,19 @@ CSS绑定用于为元素节点添加一组样式, 因此要求属性值为对象
     <script>
         avalon.define({
             $id: 'test',
-            obj: {color: 'blur ', 'text-algin': 'center'},//属性名带-,必须用引号括起
+            obj: {backgroundColor: '#3bb0d0',width:300, height:50, 'text-align': 'center'},//属性名带-,必须用引号括起
             active: {color: 'red'},
-            width: 111,
-            height:222,
-            toggle: false,
-            array: [{width:1},{height:2}]
+            width:  300,
+            height: 60,
+            toggle: true,
+            array: [{width:100},{height:50},{border: '1px solid #5cb85c'}]
         })
 
     </script>
-  <span ms-css="@obj">直接引用对象</span>
-  <span :css="{width: @width, height: @height}">使用对象字面量</span>
-  <span :css="@array">直接引用数组</span>
-  <span :css="[@obj1, @toggle && @active ]" :click="@active = !@active">选择性添加多余属性或重写已有属性</span>
+  <div ms-css="@obj">直接引用对象</div>
+  <div :css="{width: @width, height: @height,background: 'pink'}">使用对象字面量</div>
+  <div :css="@array">直接引用数组</div>
+  <div :css="[@obj, @toggle && @active ]" :click="@toggle = !@toggle">选择性添加多余属性或重写已有属性</div>
 </body>  
 ```
 需要注意的是 设置背景图片是比较复杂

@@ -245,7 +245,7 @@ avalon.define({
 只能用于ms-for循环,对数组与对象都有效, 用于获取它们的某一子集, 有至少一个参数
 
 search，如果为函数时, 通过返回true决定成为子集的一部分; 如果是字符串或数字, 将转换成正则, 如果数组元素或对象键值匹配它,则成为子集的一部分,但如果是空字符串则返回原对象 ;其他情况也返回原对象。
-其他参数, 只有当search为函数时有效, 这时其参数依次是组元素或对象键值, 索引值, 多余的参数
+其他参数, 只有当search为函数时有效, 这时其参数依次是{% em color="#b20000" %}组元素或对象键值, 索引值, 多余的参数{% endem %}
 此过滤多用于自动完成的模糊匹配!
 
 ```html
@@ -285,6 +285,27 @@ search，如果为函数时, 通过返回true决定成为子集的一部分; 如
  
 ````
 
+
+```html
+<script>
+    var vm = avalon.define({
+        $id: 'test',
+        arr: [{name: 'wanglin', age: 11},
+            {name: 'lin', age: 3},
+            {name: 'Hunt', age: 22},
+            {name: 'Joe', age: 33}],
+        fn: function(a){//过滤数组中 name属性值带lin中的元素
+            return  /lin/.test(a.name)
+        }
+    })
+</script>
+<div ms-controller='test' >	
+    <div ms-for="(index,el) in @arr as items | filterBy(@fn)" >
+        {{el.name}} -- {{items.length}}
+    </div>	
+</div>
+ 
+````
 
 ###selectBy
 
@@ -393,3 +414,104 @@ search，如果为函数时, 通过返回true决定成为子集的一部分; 如
 ```html
 <input ms-duplex='@aaa | debounce(200)'>{{@aaa}}
 ```
+
+##编写过滤器
+
+编写一个过滤器是非常简单的. 目前用户可编写的过滤器有两种, 不带参数的及带参数.
+
+比方说uppercase,就是不带参数
+
+```javascript
+vm.aaa = "aaa"
+
+<div>{{@aaa | uppercase}}</div>
+```
+输出:
+
+```html
+<div>AAA</div>
+
+```
+
+那它是怎么实现的呢? 源码是这样的
+```javascript
+avalon.filters.uppercase = function (str) {
+    return String(str).toUpperCase()
+}
+```
+
+过滤器总是把它前方的表达式生成的东西作为过滤器的第一个参数,然后返回一个值
+
+同理lowercase的源码也很简单. 之所以用String,因为我们总想返回一个字符串
+
+```javascript
+avalon.filters.lowercase = function (str) {
+    return String(str).toLowerCase()
+}
+```
+
+那么我们自定义一个过滤器,就首先要看一下文档,注意不要与现有的过滤器同名. 比如我们定义一个haha的过滤器
+```html
+<script>
+   avalon.filters.haha = function(a){
+       return a +'haha'
+   } 
+   avalon.define({
+       $id:'test',
+       aaa: '111'
+   })
+</script>
+<div ms-controller='tesst'>{{@aaa | haha}}</div>// 111haha
+```
+
+我们再看带参数的,带参数的必须写的括号,把第二个,第三个,放到里面
+
+```html
+<div>{{@aaa | truncate(10,'...')}}</div>
+
+```
+
+truncate要传两个参数,那么看一下其源码是这样的:
+```javascript
+avalon.filters.truncate = function (str, length, truncation) {
+    //length，新字符串长度，truncation，新字符串的结尾的字段,返回新字符串
+    length = length || 30
+    truncation = typeof truncation === "string" ? truncation : "..."
+    return str.length > length ?
+            str.slice(0, length - truncation.length) + truncation :
+            String(str)
+}
+```
+
+好了,我们看一下如何写一个带参数的过滤器,里面重复利用已有的过滤器
+
+众所周知,ms-attr是返回一个对象. 我们只想对其中的一个字段进行格式化.
+比如我们要处理title. 那么就起名为title.
+```html
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <script type="text/javascript" src="../dist/avalon.js"></script>
+        <script>
+            avalon.filters.title = function (obj, a, b) {
+                var title = obj.title
+                var newTitle = avalon.filters.truncate(title, a, b)
+                obj.title = newTitle
+                return obj
+            }
+            var vm = avalon.define({
+                $id: 'test',
+                el: '123456789qwert'
+            })
+
+        </script>
+    </head>
+    <body ms-controller="test">
+        <div ms-attr="{title:@el} | title(10,'...')">333</div>
+    </body>
+</html>
+
+```
+
+

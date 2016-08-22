@@ -137,7 +137,7 @@ avalon.ready(function(){
 ```
 
 ### define
-创建一个vm对象,必须指定$id,详见[这里](http://avalonjs.coding.me/cn/doc.html#conpect_vmodel)
+创建一个vm对象,必须指定$id,详见[这里](vm.md)
 ```javascript
 avalon.define({
   $id: 'aaa',
@@ -292,7 +292,7 @@ avalon.filters.haha = function(str){
 
 ### validators
 
-放置所有验证规则,详见[这里](http://avalonjs.coding.me/cn/duplex-validator.html)
+放置所有验证规则,详见[这里](duplex-validator.md)
 
 
 ### parsers
@@ -355,7 +355,7 @@ avalon.directive('html', {
 用于定义一个动画效果,详见[这里](directives/ms-effect.md)
 
 ### component
-用于定义一个组件,详见[这里](http://avalonjs.coding.me/cn/doc.html#directive_com)
+用于定义一个组件,详见[这里](component.md)
 
 ### range
 

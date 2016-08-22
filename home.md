@@ -1,7 +1,8 @@
 <!-- toc -->
 # 简介
 
-avalon2是一款基于虚拟DOM与属性劫持的 迷你、 易用、 高性能 的 前端MVVM框架， 适用于各种场景, 兼容各种古老刁钻浏览器, 吸收最新的技术成果, 能迅速堆砌组件与应用。
+avalon2是一款基于虚拟DOM与属性劫持的 迷你、 易用、 高性能 的 前端MVVM框架， 
+拥有超优秀的兼容性, 支持移动开发, 后端渲染, WEB Component式组件开发, 无需编译, 开箱即用。
 
 ## [谁在使用avalon](who.md)
 
@@ -9,6 +10,8 @@ avalon2是一款基于虚拟DOM与属性劫持的 迷你、 易用、 高性能 
 ## 使用方式
 
 avalon2： https://github.com/RubyLouvre/avalon/tree/2.1.3/dist
+
+CDN: https://cdnjs.com/libraries/avalon.js (推荐)
 
 CDN: http://www.bootcdn.cn/avalon.js/
 
@@ -115,6 +118,10 @@ avalon2.1.15后还可以使用`:xxxx`短指令.
     </ul>
 </body>
 ```
+
+## 后端渲染
+
+https://github.com/RubyLouvre/avalon-server-render-example
 
 ## avalon起源
 ----------------------

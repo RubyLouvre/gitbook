@@ -14,7 +14,7 @@ var vm = avalon.define({
   toggle: false
 })
 </script>
-<div ms-skip >{{@aaa}}</div>
+<div ms-skip='true' >{{@aaa}}</div>
 <div>{{@aaa}}</div>
 </body>
 ```

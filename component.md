@@ -103,6 +103,10 @@ avalon2 的默认配置项比avalon1.5 少许多。所有组件通用的配置�
 
 * onInit, onReady, onViewChange, onDispose四大生命周期钩子。
 
+
+> 注意,如果你在配置对象没有写$id, 会在控制下看一个警告
+
+
 其他组件需要传入的属性与方法，也可以写配置对象中。
 为了方便传数据，ms-widget也像ms-class那样能对应一个数组。
 

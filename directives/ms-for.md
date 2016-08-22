@@ -11,15 +11,34 @@ ms-for可以同时循环对象与数组
 ```
             
 现在采用类似angular的语法, in前面如果只有一个变量,那么它就是数组元素或对象的属性名
+```javascript
+vm.aaa = ['aaa','bbb','ccc']
+vm.bbb = {a: 1, b: 2, c: 3}
+```
 
 ```html
+
 <ul>
-    <li ms-for="(aaa, bbb) in @aaa">{{el}}</li>
+    <li ms-for="(aaa, el) in @aaa">{{aaa}}-{{el}}</li>
+</ul
+<ul>
+    <li ms-for="(k, v) in @bbb">{{k}}-{{v}}</li>
 </ul>
 ```
+依次输出的LI元素内容为0-aaa,1-bbb,2-ccc, a-1,b-2,c-3
+
+
 
 in 前面有两个变量, 它们需要放在小括号里,以逗号隔开, 那么分别代表数组有索引值与元素, 或对象的键名与键值, 这个与jQuery或avalon的each方法的回调参数一致。
 
+> 小括号里面的变量是随便起的,主要能符合JS变量命名规范就行,当然,也不要与window, this这样变量冲突.
+
+
+```
+ <li ms-for="($index, el) in @arr">{{$index}}-{{el}}</li>
+ <li ms-for="($key, $val) in @obj">{{$key}}-{{$val}}</li>
+```
+写成这样,就与avalon1.*很相像了
 
 如果你想截取数组的一部分出来单独循环,可以用limitBy过滤器, 使用as来引用新数组
 
