@@ -1,5 +1,40 @@
 # 更新日志
 
+
+## 2.1.14
+修正 ms-important的BUG
+
+重构 escapeHTML与unescapeHTML方法
+
+改用id来定义组件VM的$id
+
+修正pattern验证规则
+
+添加大量测试, {% em color='red' %}覆盖率达到90%{% endem %}
+
+## 2.1.13
+
+修正 ms-controller, ms-important的移除类名的实现
+
+实现后端渲染
+
+fix safari, 微信不支持使用Object.defineProperty重写元素属性的BUG
+
+分离DOM API
+
+fix ms-on BUG 
+
+## 2.1.12
+
+修正 ms-click 在 ms-if 下失效的问题 #1652
+
+修正 limitBy BUG
+
+修正 节点对齐算法 BUG
+
+优化 mediatorFactory
+
+修正 data-for-rendered BUG
  
 ## 2.1.11
 
@@ -8,6 +43,9 @@
 修正 节点对齐算法 BUG
 
 优化 mediatorFactory
+
+修正 data-for-rendered BUG
+
 
 ## 2.1.10
 

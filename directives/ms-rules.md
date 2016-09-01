@@ -83,6 +83,72 @@ avalon内置验证规则有
 | resetInFocus | true，在focus事件中执行onReset回调 |
 | deduplicateInValidateAll |false，在validateAll回调中对reason数组根据元素节点进行去重 |
 	
+我们看一下如何{% em color="#FF7F24" %}自定义验证规则{% endem %}.
+
+比如说我们有一个变态的需求,一个字段可以不填，但如果要填的话一定要是合法的数字,并且大于零.
+这就需要自定义规则了.
+
+```
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>ms-validate</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" /> 
+        <script src="../dist/avalon.js"></script>
+        <script>
+            avalon.validators.aaa = {
+                message: '必须数字并大于0',
+                get: function (value, field, next) {
+                   //想知道它们三个参数是什么,可以console.log(value, field,next)
+                    var ok = (value === '' || (Number(value) > 0))
+                    next(ok)
+                    return value
+                }
+            }
+            var vm = avalon.define({
+                $id: "test",
+                aaa: '',
+                validate: {
+                    onError: function (reasons) {
+                        reasons.forEach(function (reason) {
+                            console.log(reason.getMessage())
+                        })
+                    },
+                    onValidateAll: function (reasons) {
+                        if (reasons.length) {
+                            console.log('有表单没有通过')
+                        } else {
+                            console.log('全部通过')
+                        }
+                    }
+                }
+            })
+        </script>
+    </head>
+
+    <body ms-controller="test">
+        <form class="cmxform" ms-validate="@validate" >
+            <fieldset>
+                <legend>自定义规则</legend>
+                <p>
+                    <input 
+                        ms-duplex="@aaa"
+                        ms-rules="{aaa: true}" 
+                        >
+                </p>
+            </fieldset>
+            <p>
+                <input class="submit" type="submit" value="提交">
+            </p>
+        </fieldset>
+    </form>
+</body>
+</html>
+
+```
+
+
 	
 在上表还有一个没有提到的东西是如何显示错误信息，这个avalon不帮你处理。但提示信息会帮你拼好，如果你没有写，直接用验证规则的message，否则在元素上找data-message或data-required-message这样的属性。
 ```html
@@ -198,8 +264,8 @@ avalon内置验证规则有
                     <input id="firstname" 
                            name="firstname" 
                            ms-duplex="@firstname"
-                           ms-rules="{required:true}" 
-                           data-required-message="请输入您的名字" >
+                           ms-rules="{required:true, pattern: /[\u4e00-\u9fa5a-z]{2-8}/i }" 
+                           data-required-message="必须是中文或字母(3-8个字符)" >
                 </p>
                 <p>
                     <label for="lastname">姓氏</label>

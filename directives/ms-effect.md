@@ -227,6 +227,63 @@ onEnterDone, onLeaveDone, onEnterAbort, onLeaveAbort, onBeforeEnter, onBeforeLea
     </body>
 </html>
 ```
+
+```
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no">
+        <style>
+            .animate-enter, .animate-leave{
+                width:100px;
+                height:100px;
+                background: #29b6f6;
+                transition: width 2s;
+                -moz-transition: width 2s; /* Firefox 4 */
+                -webkit-transition: width 2s; /* Safari 和 Chrome */
+                -o-transition: width 2s; /* Opera */
+            }  
+            .animate-enter-active, .animate-leave{
+                width:300px;
+            }
+            .animate-leave-active{
+                width:100px;
+            }
+        </style>
+        <title></title>
+    </head>
+    <body ms-controller="body">
+        <button ms-click="@show">show</button>
+        <template :widget="{is:'ms-test',$id:'effxx'}"></template>
+        <script src="../dist/avalon.js"></script>
+        <script>
+            avalon.effect("animate",{});
+            avalon.component("ms-test",{
+                template : "<div><div :for='el in @data' :effect='{is : \"animate\",action : el.action}'></div></div>",
+                defaults : {
+                    //这里不会报错
+                    data : [{action : 'enter'}],
+                    add : function(){
+                        //push的时候报错
+                        this.data.push({
+                            action : "enter"
+                        });
+                    }
+                }
+            });
+            avalon.define({
+                $id : "body",
+                show : function(){
+                    avalon.vmodels.effxx.add();
+                }
+            });
+        </script>
+    </body>
+</html>
+
+```
 ** ms-widget+ms-for+ms-if+ms-effect的动画效果 **
 
 ```html
