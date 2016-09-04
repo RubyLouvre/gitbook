@@ -9,6 +9,7 @@ avalon内置验证规则有
 | 规则 | 描述 |
 | -- | -- |
 | required(true) | 必须输入的字段 |
+| norequired(true) | 不是必填的字段 |
 | email(true) | 必须输入正确格式的电子邮件 |
 | url(true) | 必须输入正确格式的网址 |
 | date(true或正则) | 必须输入正确格式的日期。默认是要求YYYY-MM-dd这样的格式 |
@@ -73,7 +74,7 @@ avalon内置验证规则有
 | -- | -- |
 | fields | 框架自行添加，用户不用写。为一个数组，放置ms-duplex生成的Field对象。 |
 | onSuccess| 空函数，单个验证成功时触发，this指向被验证元素this指向被验证元素，传参为一个对象数组外加一个可能存在的事件对象。 |
-| onError | 空函数，单个验证无论成功与否都触发，this与传参情况同上 |
+| onError | 空函数，单个验证失败时触发，this与传参情况同上 |
 | onComplete |空函数，单个验证无论成功与否都触发，this与传参情况同上。 |
 | onValidateAll | 空函数，整体验证后或调用了validateAll方法后触发；有了这东西你就不需要在form元素上ms-on-submit="submitForm"，直接将提交逻辑写在onValidateAll回调上|
 | onReset | 空函数，表单元素获取焦点时触发，this指向被验证元素，大家可以在这里清理className、value |

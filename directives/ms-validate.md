@@ -37,7 +37,55 @@ var reason = {
 }
 ```
 
+```
+<body>
+<script>
+    var vm = avalon.define({
+        $id: "test",
+        action: '',
+        firstName: '',
+        add: function() {
+            this.action = "add.php";
+            this.validate.onManual();
+        },
+        update: function(){
+            this.action = "update.php";
+            this.validate.onManual();
+        },
+        validate: {
+            validateAllInSubmit: false,
+            onSuccess: function(reasons, event) {
+                console.info('OK')
+            },
+            onError: function(reasons, event) {
+                console.info('error')
+            },
+            onValidateAll: function(reasons, form) {
+                if(reasons.length) {
+                    // 表单有错误
+                    console.info("error");
+                    return false;
+                } else {
+                    // 验证成功
+                    form.submit()
+                }
+            }
 
+        }
+    })
+</script>
+
+<div ms-controller="test">
+    <form :validate="@validate" id="f1" :attr="{ action: @action }">
+        <input type="text" placeholder="Insert your First Name" :duplex="@firstName" :rules="{ required: true }" />
+        <input type="submit" value="新建用户 action:  127.0.0.1/add" :click="@add"/>
+        <input type="submit" value="修改用户 action: 127.0.0.1/update" :click="@update"/>
+    </form>
+
+</div>
+</body>
+
+```
 
 
 有关它的详细用法建议看[ms-rules](ms-rules.md)指令

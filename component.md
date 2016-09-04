@@ -346,6 +346,8 @@ npm install avalon-promise
 npm install fetch-polyfill2
 
 ```
+[mmRequest](https://github.com/RubyLouvre/mmRequest)
+
 [qwest.js](https://github.com/pyrsmk/qwest)
 
 [reqwest.js](https://github.com/ded/reqwest)
@@ -359,8 +361,10 @@ npm install mmDux
 ```
 
 ### 路由组件
+
+[mmRouter](https://github.com/RubyLouvre/mmRouter)
+
 [page.js](https://github.com/visionmedia/page.js)
-[ReactTraining/history](https://github.com/ReactTraining/history)
 
 
 ### 动画组件 

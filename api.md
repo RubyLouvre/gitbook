@@ -145,6 +145,33 @@ avalon.define({
 })
 ```
 
+###ready
+
+当**domReady**发生时,框架会自动调用的方法,会传入avalon作为参数
+
+该方法与jQuery.ready相仿.
+```javascript
+avalon.ready(fn1)
+avalon.ready(fn2)
+avalon.ready(fn3)
+avalon.ready(fn4)
+```
+当domReady发生时,fn1, fn2, fn3, fn4会依次执行!
+
+熟悉jQuery的人, 都知道domReady事件. window.onload事件是在页面所有的资源都加载完毕后触发的.
+如果页面上有大图片等资源响应缓慢, 会导致window.onload事件迟迟无法触发.所以出现了DOM Ready事件. 
+此事件在DOM文档结构准备完毕后触发, 即在资源加载前触发. 另外我们需要在DOM准备完毕后, 再修改DOM结构, 比如添加DOM元素等. 否则有可能出现“Internet Explorer无法打开站点”的问题. 
+要模拟此错误, 可以在页面上添加下面的代码, 并用IE6打开:
+
+```html
+<div>
+    <script type="text/javascript">
+        var div = document.createElement('div');
+        div.innerHTML = "test";
+        document.body.appendChild(div);
+    </script>
+</div>
+```
 
 ### noop
 
