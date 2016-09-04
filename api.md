@@ -2,7 +2,9 @@
 
 ##静态成员
 
-### scan
+### vm&component
+
+#### scan
 用于描述HTML,将包括ms-controller/ms-imporant的元素的outerHTML取出来,
 变成对应的vm的render方法, 最终将里面的ms-*或双花括号变成vm中的属性与方法
 
@@ -136,8 +138,9 @@ avalon.ready(function(){
 </html>
 ```
 
-### define
+#### define
 创建一个vm对象,必须指定$id,详见[这里](vm.md)
+
 ```javascript
 avalon.define({
   $id: 'aaa',
@@ -173,127 +176,7 @@ avalon.ready(fn4)
 </div>
 ```
 
-### noop
-
-空函数
-
-### rword
-
-切割字符串为一个个小块，以空格或逗号分开它们，结合replace实现字符串的forEach
-```javascript
-"aaa,bbb,ccc".replace(avalon.rword, function(a){
-  console.log(a)//依次打出 aaa, bbb, ccc
-  return a
-})
-```
-
-### log
-
-类似于console.log,但更安全,因为IE6没有console.log,而IE7下必须打开调试界面才有console.log
-
-可以传入多个参数
-
-```javascript
-avalon.log('aaa','bbb')
-```
-
-### warn
-```javascript
-avalon.warn('aaa','bbb')
-```
-
-类似于console.warn, 不存在时内部调用avalon.log
-
-### error
-
-抛出一个异常对象
-
-1. 字符串,错误消息
-2. 可选, Error对象的构造器(如果是纯字符串,在某些控制台下会乱码,因此必须包成一个对象)
-
-```javascript
-avalon.error('aaa')
-```
-
-### oneObject
-
-将一个以空格或逗号隔开的字符串或数组,转换成一个键值都为1的对象
-1.  以空格或逗号隔开的字符串或数组, "aaa,bbb,ccc",['aaa','bbb','ccc']
-2.  生成的对象的键值都是什么值,默认1
-
-```javascript
-avalon.oneObject("aaa,bbb,ccc")//{aaa:1,bbb:1,ccc:1}
-```
-
-### isWindow
-
-判定是否为一个window对象
-```javascript
-avalon.isWindow('ddd')//false
-```
-
-### isFunction
-
-判定是否为一个函数
-```javascript
-avalon.isFunction(window.alert)//true
-```
-
-### isObject
-
-是否为一个对象, 返回布尔
-
-```
-avalon.isObject({a:1,b:2})//true
-avalon.isObject(window.alert) //true
-avalon.isObject('aaa') //false
-```
-
-### type
-
-取得目标的类型 
-```javascript
-avalon.type('str') //'string'
-avalon.type(123) //'number'
-avalon.type(/\w+/) //'regexp'
-avalon.type(avalon.noop) //'function'
-```
-
-### isPlainObject
-
-判定是否为一个纯净的JS对象, 不能为window, 任何类(包括**自定义类**)的实例,元素节点,文本节点
->用于内部的深克隆, VM的赋值, each方法
-```javascript
-avalon.isPlainObject({}) //true
-avalon.isPlainObject(new Object) //true
-avalon.isPlainObject(Object.create(null)) //true
-var A = function(){}
-avalon.isPlainObject(new A) //false
-```
-
-### each
-
-用于遍历对象或类数组,数组
-```javascript
-avalon.each(arr, function(index, el){
-  
-})
-```
-
-### mix
-
-用于合并多个对象或深克隆,类似于jQuery.extend
->注意,不要加VM批量赋值时用它
-
-```javascript
-//合并多个对象,返回第一个参数
-target = avalon.mix(target, obj1, obj2, obj3)
-//深拷贝模式, 要求第一个参数为true, 返回第二个参数
-target = avalon.mix(true, target, obj1, obj2)
-```
-
-
-### vmodels
+#### vmodels
 
 放置所有用户定义的vm及组件指令产生的组件vm
 
@@ -302,7 +185,29 @@ avalon.define({$id:'aaa'})
 console.log(avalon.vmodels) // {aaa: vm}
 ```
 
-### filters
+
+#### component
+用于定义一个组件,详见[这里](component.md)
+
+#### components
+
+放置所有用avalon.component方法添加的组件配置对象
+
+
+
+#### effect
+用于定义一个动画效果,详见[这里](directives/ms-effect.md)
+
+#### validators
+
+放置所有验证规则,详见[这里](duplex-validator.md)
+
+
+#### parsers
+
+放置所有数据格式转换器
+
+#### filters
 
 放置所有过滤器,也可以在上面添加你的自定义过滤器
 
@@ -313,32 +218,10 @@ avalon.filters.haha = function(str){
 
 ```
 
-### components
-
-放置所有用avalon.component方法添加的组件配置对象
-
-### validators
-
-放置所有验证规则,详见[这里](duplex-validator.md)
 
 
-### parsers
 
-放置所有数据格式转换器
-
-### slice
-
-用于转换类数组对象为纯数组对象
-
-1. 目示对象
-2. 开始索引, 默认为0
-3. 结束索引, 默认为总长
-
-```javascript
-avalon.slice(document.body.childNodes)
-```
-
-### directive
+#### directive
 
 定义一个指令, 请翻看源码,看css, attr, html是怎么玩的
 1. 指令名
@@ -378,13 +261,177 @@ avalon.directive('html', {
 
 ```
 
-### effect
-用于定义一个动画效果,详见[这里](directives/ms-effect.md)
 
-### component
-用于定义一个组件,详见[这里](component.md)
 
-### range
+
+#### noop
+
+空函数
+
+
+### 控制台输出
+
+#### log
+
+类似于console.log,但更安全,因为IE6没有console.log,而IE7下必须打开调试界面才有console.log
+
+可以传入多个参数
+
+```javascript
+avalon.log('aaa','bbb')
+```
+
+#### warn
+```javascript
+avalon.warn('aaa','bbb')
+```
+
+类似于console.warn, 不存在时内部调用avalon.log
+
+#### error
+
+抛出一个异常对象
+
+1. 字符串,错误消息
+2. 可选, Error对象的构造器(如果是纯字符串,在某些控制台下会乱码,因此必须包成一个对象)
+
+```javascript
+avalon.error('aaa')
+```
+
+### 类型检验
+
+#### type
+
+取得目标的类型 
+```javascript
+avalon.type('str') //'string'
+avalon.type(123) //'number'
+avalon.type(/\w+/) //'regexp'
+avalon.type(avalon.noop) //'function'
+```
+
+
+#### isWindow
+
+判定是否为一个window对象
+```javascript
+avalon.isWindow('ddd')//false
+```
+
+#### isFunction
+
+判定是否为一个函数
+```javascript
+avalon.isFunction(window.alert)//true
+```
+
+#### isObject
+
+是否为一个对象, 返回布尔
+
+```
+avalon.isObject({a:1,b:2})//true
+avalon.isObject(window.alert) //true
+avalon.isObject('aaa') //false
+```
+
+
+
+#### isPlainObject
+
+判定是否为一个纯净的JS对象, 不能为window, 任何类(包括**自定义类**)的实例,元素节点,文本节点
+>用于内部的深克隆, VM的赋值, each方法
+```javascript
+avalon.isPlainObject({}) //true
+avalon.isPlainObject(new Object) //true
+avalon.isPlainObject(Object.create(null)) //true
+var A = function(){}
+avalon.isPlainObject(new A) //false
+```
+
+### DOM
+
+
+#### bind
+添加事件
+1. 元素节点,window, document
+2. 事件名
+3. 回调
+4. 是否捕获,可选
+
+```javascript
+avalon.bind(window, 'load',loadFn)
+
+```
+
+#### unbind
+移除事件
+参数与bind方法相同
+
+#### parseHTML 
+转换一段HTML字符串为一个文档对象
+
+```javascript
+avalon.parseHTML('<b>222</b><b>333</b>')
+```
+
+#### innerHTML
+类似于`element.innerHTML = newHTML` ,但兼容性更好
+1. node 元素节点
+2. 要替换的HTML字符串
+
+```javascript
+var elem = document.getElementById('aaa')
+avalon.innerHTML(elem, '<b>222</b><b>333</b>')
+```
+
+#### clearHTML
+用于清空元素的内部
+```javascript
+avalon.clearHTML(elem)
+```
+
+#### contains
+判定A节点是否包含B节点
+1. A 元素节点
+2. B 元素节点
+
+```javascript
+avalon.contains(document.body, document.querySelector('a'))
+```
+
+### String
+
+#### hyphen
+
+转换为连字符线风格
+
+```javascript
+avalon.hyphen('aaaAaa') //aaa-aaa
+```
+
+#### camelize
+
+转换为驼峰风格
+```javascript
+avalon.hyphen('aaa-Bbb') //aaaBBB
+```
+#### rword
+
+切割字符串为一个个小块，以空格或逗号分开它们，结合replace实现字符串的forEach
+```javascript
+"aaa,bbb,ccc".replace(avalon.rword, function(a){
+  console.log(a)//依次打出 aaa, bbb, ccc
+  return a
+})
+```
+
+
+
+### Array&Object
+
+#### range
 
 用于生成整数数组
 1. start 开始值, 
@@ -403,68 +450,53 @@ avalon.range(0, -10, -1)
 avalon.range(0)
 ```
 
-### hyphen
 
-转换为连字符线风格
+#### each
 
+用于遍历对象或类数组,数组
 ```javascript
-avalon.hyphen('aaaAaa') //aaa-aaa
+avalon.each(arr, function(index, el){
+  
+})
 ```
 
-### camelize
+#### mix
 
-转换为驼峰风格
-```javascript
-avalon.hyphen('aaa-Bbb') //aaaBBB
-```
-
-### bind
-添加事件
-1. 元素节点,window, document
-2. 事件名
-3. 回调
-4. 是否捕获,可选
+用于合并多个对象或深克隆,类似于jQuery.extend
+>注意,不要加VM批量赋值时用它
 
 ```javascript
-avalon.bind(window, 'load',loadFn)
-
+//合并多个对象,返回第一个参数
+target = avalon.mix(target, obj1, obj2, obj3)
+//深拷贝模式, 要求第一个参数为true, 返回第二个参数
+target = avalon.mix(true, target, obj1, obj2)
 ```
 
-### unbind
-移除事件
-参数与bind方法相同
 
-### parseHTML 
-转换一段HTML字符串为一个文档对象
-```javascript
-avalon.parseHTML('<b>222</b><b>333</b>')
-```
 
-### innerHTML
-类似于`element.innerHTML = newHTML` ,但兼容性更好
-1. node 元素节点
-2. 要替换的HTML字符串
-```javascript
-var elem = document.getElementById('aaa')
-avalon.innerHTML(elem, '<b>222</b><b>333</b>')
-```
+#### slice
 
-### clearHTML
-用于清空元素的内部
-```javascript
-avalon.clearHTML(elem)
-```
+用于转换类数组对象为纯数组对象
 
-### contains
-判定A节点是否包含B节点
-1. A 元素节点
-2. B 元素节点
+1. 目示对象
+2. 开始索引, 默认为0
+3. 结束索引, 默认为总长
 
 ```javascript
-avalon.contains(document.body, document.querySelector('a'))
+avalon.slice(document.body.childNodes)
 ```
 
-### Array
+#### oneObject
+
+将一个以空格或逗号隔开的字符串或数组,转换成一个键值都为1的对象
+1.  以空格或逗号隔开的字符串或数组, "aaa,bbb,ccc",['aaa','bbb','ccc']
+2.  生成的对象的键值都是什么值,默认1
+
+```javascript
+avalon.oneObject("aaa,bbb,ccc")//{aaa:1,bbb:1,ccc:1}
+```
+
+
 
 #### Array.merge
 
@@ -497,22 +529,7 @@ avalon.Array.removeAt([1,2,3],1)//[1,3]
 avalon.Array.remove(['a','b','c'],'a')//['b','c']
 ```
 
-##被修复了的ecma262方法
 
-1. String.prototype.trim
-2. Function.prototype.bind
-3. Array.isArray<br>
-   avalon内部使用它判定是否数组
-4. Object.keys
-5. Array.prototype.slice<br>
-   IE6-8下有BUG,这里做了修复
-6. Array.prototype.indexOf
-7. Array.prototype.lastIndexOf
-8. Array.prototype.forEach
-9. Array.prototype.map
-10. Array.prototype.filter
-11. Array.prototype.some
-12. Array.prototype.every
 
 
 ##实例成员
@@ -611,3 +628,25 @@ avalon(elem).bind('click', clickFn)
 
 ### unbind
 类似于avalon.unbind
+
+
+##被修复了的ecma262方法
+
+1. String.prototype.trim
+2. Function.prototype.bind
+3. Array.isArray<br>
+   avalon内部使用它判定是否数组
+4. Object.keys
+5. Array.prototype.slice<br>
+   IE6-8下有BUG,这里做了修复
+6. Array.prototype.indexOf
+7. Array.prototype.lastIndexOf
+8. Array.prototype.forEach
+9. Array.prototype.map
+10. Array.prototype.filter
+11. Array.prototype.some
+12. Array.prototype.every
+
+
+<script src="/js/index_write.js"></script>
+<link rel="stylesheet" href="/css/index_write.css">
