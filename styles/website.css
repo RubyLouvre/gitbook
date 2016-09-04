@@ -3,6 +3,29 @@
     text-indent: 2em;
 }
 
+.markdown-section blockquote{
+    position:relative;
+    margin-left: 10px;
+    border-left: 4px solid #f66;
+}
+.markdown-section blockquote:before{
+    position: absolute;
+    top: 14px;
+    left: -12px;
+    background-color: #f66;
+    color: #fff;
+    content: "!";
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    text-align: center;
+    line-height: 20px;
+    font-weight: bold;
+    font-family: 'Dosis', 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif;
+    font-size: 14px;
+}
+
+   
 
 .docs-header {
   position: relative;

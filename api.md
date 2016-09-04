@@ -10,7 +10,6 @@
 
 > 注意: 如果你是将vm定义放在jQuery.ready或avalon.ready中必须手动调用这个方法.   
  
- 
 > 注意: avalon2不会像avalon1那样将ms-*属性去掉了
 
 > 注意: avalon不能扫描iframe的内容
@@ -148,7 +147,7 @@ avalon.define({
 })
 ```
 
-###ready
+####ready
 
 当**domReady**发生时,框架会自动调用的方法,会传入avalon作为参数
 
