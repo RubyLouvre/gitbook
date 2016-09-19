@@ -4,7 +4,7 @@ avalon的所有操作都是围绕vm进行。
 vm，亦即view model，视图模型。只要我将一个JS对象添加一个$id属性，
 再放到avalon.define方法里面，就能得到一个vm。
 
-```
+```javascript
  var vm = avalon.define({
     $id: "start",
     name: "test"
@@ -12,7 +12,7 @@ vm，亦即view model，视图模型。只要我将一个JS对象添加一个$id
 
 ```
 
-vm是一种利用Proxy或 Object.defineProperties或VBScript创建的特殊对象。
+vm是一种利用{% em color="#FF82AB" %}Proxy或 Object.defineProperties或VBScript{% endem %}创建的特殊对象。
 
 里面以$带头的属性或放到$skipArray，都转换为访问器属性，也就是其他语言的setter, getter。因此如果这个属性最初没有定义，那么它就不会转换为访问器属性，修改该属性，就不会刷新视图。
 
@@ -222,12 +222,15 @@ setTimeout(function () {
 $watch会返回一个函数,用于解除监听:
 
 ```javascript
-var unwatch = vm.$watch("array.*", function (a, b) {
+var unwatch = vm.$watch("aaa", function observe(a, b) {
     expect(a).to.be(6)
     expect(b).to.be(2)
 })
 unwatch() //移除当前$watch回调
 ````
+当解除监听后,以后aaa属性的值再发生变化,那么observe方法就不会再执行. 注意unwatch不等于observe
+
+
 监听函数有三个参数， 第一个是新值， 第二个是旧值， 第三个是发生变动的属性的名字。
 
 $watch方法供与其他操作DOM的库一起使用的,如富文本编辑器什么. 在$watch回调里更新VM自身的属性是非常危险的事,很容易引发死循环
@@ -261,8 +264,14 @@ $fire可以传多个参数， 第一个参数为事件名，或者说是VM上已
 
 avalon之所以使用Proxy, Object.defineProperty或VBScript来构造vm，那是因为它们创建出来的对象有一种自省机制，能让我们得知vm正在操作或访问了我们的对象。
 
-对于Object.defineProperty或VBScript，主要是靠将普通属性变成访问器属性。访问器属性内部是拥有两个方法，setter与getter。当用户读取对象的属性时，就将调用其getter方法，当用户为此属性赋值时，就会调用setter方法。因此，我们就不需要像angular那样，使用脏检测，就得知对象被修改了某些属性了。并且能准确得知那些属性，及时地同步视图的相应区域，实现最小化刷新视图。
+对于Object.defineProperty或VBScript，主要是靠将普通属性变成访问器属性。访问器属性内部是拥有两个方法，setter与getter。当用户读取对象的属性时，就将调用其getter方法，当用户为此属性赋值时，就会调用setter方法。因此，我们就不需要像angular那样，使用脏检测，就得知对象被修改了某些属性了。
+并且能准确得知那些属性，及时地同步视图的相应区域，实现最小化刷新视图。
 
+>  插值表达式里的内容与 `ms-*` 的属性值都会转换求值函数,
+>  比如说 `{{@aaa}}` 变成`function(){return __vmodel__.aaa}`
+>  `ms-attr="{title: @name}"` 变成 `function(){ return {title: __vmodel__.name} }`
+>  此外,请不要出现  `@aaa[@bbb].ddd`,  `@eee[ddd]`, 可能导致依赖收集失败, 无法更新对应区域
+   
 
 对于Proxy(智能代理)，这最早发迹于firefox4，现在许多新浏览器都支持，它能监听外部用户对它的14种，比如说读写属性，调用方法，删除旧属性，添加新属性，被for in循环， 被in关键字进行存在性检测， 被new……因此之前所说的，不能监听没预先定义的属性， 这个难题被Proxy搞定了。
 

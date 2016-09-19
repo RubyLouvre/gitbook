@@ -1,12 +1,14 @@
 #过滤器
 
 ##格式化过滤器
-用于处理数字或字符串，多用`于{{}}`或ms-attr或ms-class
+用于处理数字或字符串，多用于{% em color="#AEEEEE" %}`{{}}`{% endem %}或{% em color="#B0C4DE"%}ms-attr{% endem %}
+或{% em color="#BFBFBF" %}ms-class{% endem %}
 > 注意: avalon的过滤器与ng的过滤器在传参上有点不一样,需要用()括起来
 
 ###uppercase
 
 将字符串全部大写
+
 
 ```javascript
 vm.aaa = "aaa"
@@ -16,6 +18,7 @@ vm.aaa = "aaa"
 ###lowercase
 
 将字符串全部小写
+
 
 ```javascript
 vm.aaa = "AAA"

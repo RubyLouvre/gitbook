@@ -1,7 +1,7 @@
 # 插值表达式
 
 
-位于文本节点中的双重花括号,当然这个可以配置.此指令其中文本ms-text指令的简单形式.
+位于文本节点中的{% em color="#FF82AB" %}双重花括号{% endem %},当然这个可以配置.此指令其中文本ms-text指令的简单形式.
 ```html
 <body ms-controller="test">
     <script>

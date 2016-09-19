@@ -29,6 +29,13 @@ avalon.ready(function(){
         //页面上每个ms-controller, ms-important元素
         //在其区域内的所有ms-*指令被扫描后会执行
     })
+     //2.1.15起支持
+    vm.$watch('onDispose', function(){
+        delete avalon.vmodels[vm.$id)
+        if(avalon.scopes){
+           delete avalon.scopes[vm.$id)
+        }
+    })
     avalon.scan(document.body)
 })
 ```
