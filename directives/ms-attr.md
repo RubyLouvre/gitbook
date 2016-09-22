@@ -20,21 +20,21 @@
             obj: {title: '普通 ', algin: 'left'},
             active: {title: '激活'},
             width: 111,
-            height:222,
-            arr: [{img:'aaa'}, {img:'bbb'},{img:'ccc'}]
-            path: '../aaa/image.jpg'
+            height: 222,
+            arr: [{img: 'aaa'}, {img: 'bbb'}, {img: 'ccc'}],
+            path: '../aaa/image.jpg',
             toggle: false,
-            array: [{width:1},{height:2}]
+            array: [{width: 1}, {height: 2}]
         })
 
     </script>
-  <span ms-attr="@obj">直接引用对象</span>
-  <img ms-attr="{src: @path}" />
-  <ul>
-    <li ms-for="el in @arr"><a ms-attr="{href: 'http://www.ccc.xxx/ddd/'+ el.img}">下载</li>
-  </ul>
-  <span :attr="{width: @width, height: @height}">使用对象字面量</span>
-  <span :attr="@array">直接引用数组</span>
-  <span :attr="[@obj, @toggle && @active ]" :click="@toggle = !@toggle">选择性添加多余属性或重写已有属性</span>
-</body>     
+    <span ms-attr="@obj">直接引用对象</span>
+    <img ms-attr="{src: @path}" />
+    <ul>
+        <li ms-for="el in @arr"><a ms-attr="{href:'http://www.ccc.xxx/ddd/'+ el.img}">下载</a></li>
+    </ul>
+    <span :attr="{width: @width, height: @height}">使用对象字面量</span><br/>
+    <span :attr="@array">直接引用数组</span><br/>
+    <span :attr="[@obj, @toggle && @active ]" :click="@toggle = !@toggle">选择性添加多余属性或重写已有属性</span>
+</body>   
 ```
