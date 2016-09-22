@@ -1,5 +1,22 @@
 # 更新日志
 
+## 2.1.15
+
+普通vm也支持onReady, onDispose方法(生命周期)
+
+添加norequire验证规则
+
+强化UUID的生成策略
+
+fix replaceChild的重写BUG(用于onDispose方法)
+
+xmp, wbr, template可以直接使用is属性代替ms-widget属性,
+
+简化attr指令的实现,其diff逻辑与css指令的diff一样,直接用css指令的
+
+一劳永逸解决IE6-8下VBS属性重复定义抛错的BUG
+
+新的 jsparser
 
 ## 2.1.14
 修正 ms-important的BUG
@@ -28,13 +45,6 @@ fix ms-on BUG
 
 修正 ms-click 在 ms-if 下失效的问题 #1652
 
-修正 limitBy BUG
-
-修正 节点对齐算法 BUG
-
-优化 mediatorFactory
-
-修正 data-for-rendered BUG
  
 ## 2.1.11
 
