@@ -20,7 +20,7 @@
    * [ms-if](directives/ms-if.md)
    * [ms-visible](directives/ms-visible.md)
    * [ms-for](directives/ms-for.md)
-   * [ms-on](ms-on.md)
+   * [ms-on](directives/ms-on.md)
    * [ms-duplex](directives/ms-duplex.md)
    * [ms-rules](directives/ms-rules.md)
    * [ms-validate](directives/ms-validate.md)
