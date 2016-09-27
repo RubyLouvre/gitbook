@@ -61,8 +61,8 @@ parsers: {
 
 当我们改成这样
 ```html
-<input type="checkbox" value="1" ms-duplex="@aaa">
-<input type="checkbox" value="2" ms-duplex="@aaa">
-<input type="checkbox" value="3" ms-duplex="@aaa">
+<input type="checkbox" value="1" ms-duplex-number="@aaa">
+<input type="checkbox" value="2" ms-duplex-number="@aaa">
+<input type="checkbox" value="3" ms-duplex-number="@aaa">
 ```
 点击第二个checkbox时，它会转换出input.value的“2”,然后再用avalon.parsers.number转换成数字，就能成功移除，于是文本就会变化。

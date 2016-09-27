@@ -67,7 +67,7 @@ avalon.next 支持IE12+(edge)及chrome49, firefox49(判定标准是
 
 [avalon论坛](http://www.avalon.org.cn/) 
 
-QQ学习群: 314247255
+QQ学习群: 453286795 79641290(进群条件,为avalon项目加star,为avalon2开发组件)
 
 
 电子书下载：[avalon cookbook](https://github.com/RubyLouvre/avalon/raw/master/avalon%20cookbook.pdf)

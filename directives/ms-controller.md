@@ -51,7 +51,7 @@ ms-controller的元素节点下面的其他节点也可以使用ms-controller
 当avalon的扫描引擎打描到ms-controller/ms-important所在元素时, 会尝试移除ms-controller类名.因此基于此特性,我们可以在首页渲染页面时, 想挡住双花括号乱码问题,可以尝试这样干(与avalon1有点不一样):
 
 ```css
-  [ms-controller]{
+  .ms-controller{
      visibility: hidden;
   }
 ```
