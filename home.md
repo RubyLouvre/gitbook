@@ -63,6 +63,8 @@ avalon.next 支持IE12+(edge)及chrome49, firefox49(判定标准是
 
 [前端乱炖网站上的avalon1.5学习教程](http://www.html-js.com/article/column/234)
 
+[基于avalon1.5的某个框架](https://www.gitbook.com/book/jsz/avalon1-5-api/details)
+
 [segementfault网站上的avalon2学习教程](https://segmentfault.com/u/situzhengmei/articles)
 
 [avalon论坛](http://www.avalon.org.cn/) 

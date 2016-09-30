@@ -185,7 +185,7 @@
 <!--for631075401544-->
 
 
-<li><a  target="_blank" href="http://www.cargopm.com/dzg-system-front/#!/home">
+<li><a  target="_blank" href="http://www.cargopm.com/">
 <img  src="styles/logos/kagou.png">
 <!--[if lt IE 8]><span></span><![endif]--></a></li>
 <!--for631075401544-->
@@ -229,6 +229,11 @@
 
 <li><a  target="_blank" href="https://www.newdefend.com/">
 <img  src="styles/logos/newdefend.png">
+<!--[if lt IE 8]><span></span><![endif]--></a></li>
+<!--for631075401544-->
+
+<li><a  target="_blank" href="http://h5.wx.ygqq.com">
+<img  src="styles/logos/ygqq.png">
 <!--[if lt IE 8]><span></span><![endif]--></a></li>
 <!--for631075401544-->
 
