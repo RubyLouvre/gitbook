@@ -31,9 +31,9 @@ avalon.ready(function(){
     })
      //2.1.15起支持
     vm.$watch('onDispose', function(){
-        delete avalon.vmodels[vm.$id)
+        delete avalon.vmodels[vm.$id]
         if(avalon.scopes){
-           delete avalon.scopes[vm.$id)
+           delete avalon.scopes[vm.$id]
         }
     })
     avalon.scan(document.body)

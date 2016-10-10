@@ -3,7 +3,6 @@
 ms-effect拥有这三种绑定形式:
 
 ```html
-<p ms-effect="fade">fade为特效名</p>   
 <p ms-effect="[@configObj,{is:'fade'}">属性值为字面量,其中一个对象必须包括is属性,这用于指定特效名</p>
 <p ms-effect="{is:fade, stagger:300}">属性值为对象字面量, 里面拥有is属性</p>
 <p ms-effect="@fadeConfig">属性值为vm的对象,里面拥有is属性</p>
@@ -29,34 +28,35 @@ avalon.effect('animate', {
 当然，这些类名会默认帮你添加，因为它内部是这样实现的。
 
 ```javascript
-avalon.effect = function (name, definition) {
-    avalon.effects[name] = definition || {}
-    if (support.css) {
-        if (!definition.enterClass) {
-            definition.enterClass = name + '-enter'
-        }
-        if (!definition.enterActiveClass) {
-            definition.enterActiveClass = definition.enterClass + '-active'
-        }
-        if (!definition.leaveClass) {
-            definition.leaveClass = name + '-leave'
-        }
-        if (!definition.leaveActiveClass) {
-            definition.leaveActiveClass = definition.leaveClass + '-active'
-        }
+
+
+avalon.effect = function (name, opts) {
+    var definition = avalon.effects[name] = (opts || {})
+    if (support.css && definition.css !== false) {
+        patchObject(definition, 'enterClass', name + '-enter')
+        patchObject(definition, 'enterActiveClass', definition.enterClass + '-active')
+        patchObject(definition, 'leaveClass', name + '-leave')
+        patchObject(definition, 'leaveActiveClass', definition.leaveClass + '-active')
 
     }
-    if (!definition.action) {
-        definition.action = 'enter'
+    patchObject(definition, 'action', 'enter')
+
+}
+function patchObject(obj, name, value) {
+    if (!obj[name]) {
+        obj[name] = value
     }
 }
 ```
+
 因此你可以简化成这样：
 
 ```javascript
 avalon.effect('animate', {})
 avalon.effect('animate')
 ```
+definition配置对象css如果等于false,那么它会强制使用JS方式
+
 注册完，我们就需要在样式表中添加真正的CSS类。
 
 ```css
@@ -228,7 +228,7 @@ onEnterDone, onLeaveDone, onEnterAbort, onLeaveAbort, onBeforeEnter, onBeforeLea
 </html>
 ```
 
-```
+```html
 <!DOCTYPE html>
 <html lang="zh-CN">
     <head>
@@ -255,28 +255,25 @@ onEnterDone, onLeaveDone, onEnterAbort, onLeaveAbort, onBeforeEnter, onBeforeLea
         <title></title>
     </head>
     <body ms-controller="body">
-        <button ms-click="@show">show</button>
-        <template :widget="{is:'ms-test',$id:'effxx'}"></template>
-        <script src="../dist/avalon.js"></script>
+        <button ms-click="@toggle">toggle</button>
+        <div ms-effect="{is : 'animate',action: @action}"></div>
+        <script src="../../dist/avalon.js"></script>
         <script>
-            avalon.effect("animate",{});
-            avalon.component("ms-test",{
-                template : "<div><div :for='el in @data' :effect='{is : \"animate\",action : el.action}'></div></div>",
-                defaults : {
-                    //这里不会报错
-                    data : [{action : 'enter'}],
-                    add : function(){
-                        //push的时候报错
-                        this.data.push({
-                            action : "enter"
-                        });
-                    }
+            avalon.effect("animate",{
+                onEnterDone: function(){
+                   avalon.log('enter done')
+                },
+                onLeaveDone: function(){
+                   avalon.log('leave done')
                 }
             });
-            avalon.define({
+           
+          var vm =  avalon.define({
                 $id : "body",
-                show : function(){
-                    avalon.vmodels.effxx.add();
+                action: 'enter',
+                toggle : function(){
+                    vm.action = vm.action === 'enter' ? 'leave' : 'enter'
+                    avalon.log('toggle', vm.action)
                 }
             });
         </script>
