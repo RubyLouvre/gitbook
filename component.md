@@ -254,7 +254,7 @@ avalon定义组件时是使用**avalon.component**方法。
 
 avalon.component方法有两个参数,第一个标签名,必须以ms-开头;第二个是配置对象.
 
-配置对象里也有4个配置项
+配置对象里也有3个配置项
 
 * template,自定义标签的outerHTML,它必须是用一个普通的HTML元素节点包起来,里面可以使用ms-*等指令, 里面的属性只能是{% em color="red" %}defaults中定义的属性与方法{% endem %}
 * defaults,用来定义这个组件的VM有什么属性与方法
