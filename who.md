@@ -237,5 +237,10 @@
 <!--[if lt IE 8]><span></span><![endif]--></a></li>
 <!--for631075401544-->
 
+<li><a  target="_blank" href="https://www.uxinuxin.com/">
+<img  src="styles/logos/uxinuxin.png">
+<!--[if lt IE 8]><span></span><![endif]--></a></li>
+<!--for631075401544-->
+
 <!--ms-for-end:--></ul>
 </div>

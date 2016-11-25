@@ -1,5 +1,67 @@
 # 更新日志
 
+##2.2.1
+
+**支持计算属性**
+
+**支持事务**
+
+
+##2.2.0
+
+**全新的依赖收集系统**
+
+减少VM的系统属性，`__const__`, `__data__`,`__proxy__`, `$skipArray`被废掉
+
+vmodel模块全部重写，让它内部用到的私用方法更加合理
+
+directives模块全部重写，因为现在不走react的渲染模板思路了
+
+component模块全部重写，它现在是完全独立的作用域
+
+strategy模块被打散了，细分为parser与renders与vtree这三个模块。renders里面有domRender与serverRender。
+
+[breakpoint] $watch不支持`*`
+
+[breakpoint] if, for不再支持动画
+
+
+##2.1.17
+
+ https://github.com/RubyLouvre/avalon/tree/2.1.8
+
+ 修复validate BUG
+
+ 解决$render方法不存在的BUG， 这个是老BUG，在2.1.14已经修了
+
+ fix IE6 fixEvent BUG
+
+ fix IE6-8 script元素由虚拟DOM变成DOM的BUG
+
+ fix IE6-8 对noscript元素innerText操作时抛错的BUG
+
+ fix IE6-8 对opacity对值不正确的BUG
+
+ fix  Object.freeze方法不存在的BUG
+
+ 添加可用的arthur.js迷你库
+
+## 2.1.16  {% em color='red' %}存在严重BUG{% endem %}
+
+fix parseExpr BUG #1768 与 #1765
+
+优化ms-effect指令,与ms-css指令共同相同的diff
+
+data-duplex-changed回调支持更多参数
+
+处理$watch监听复杂数BUG #1762
+
+处理date过滤器不解析 BUG
+
+重构ms-important后面的指令不执行的BUG
+
+改成 {% em color='red' %}es6 modules{% endem %}组织依赖,rollup.js打包
+
 ## 2.1.15
 
 普通vm也支持onReady, onDispose方法(生命周期)
