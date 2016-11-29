@@ -114,11 +114,7 @@ avalon2 的默认配置项比avalon1.5 少许多。所有组件通用的配置�
 
 
 其他组件需要传入的属性与方法，也可以写配置对象中。
-为了方便传数据，ms-widget也像ms-class那样能对应一个数组。
 
-```html
-<wbr ms-widget="[@allConfig, {id: 'xxx_'+$index}]"/>
-```
 
 > 此外,  如果你的组件是位于SPA的子页面中，或是由ms-html动态生成。
 
@@ -274,19 +270,6 @@ avalon.component('ms-pager', {
 ```
 
 
-##渲染真相 
-
-```javascript
-var widgetVTree = widgetName(widgetOptions, slots, template)
-/*
-widgetName: ms-widget中的is配置项或自定义标签的标签名
-widgetOptions: ms-widget配置项
-slots: 所有插卡元素组成的对象
-template: 组件定义中template配置项
-widgetVTree:  组件的虚拟DOM,
-*/
-
-```
 
 
 
@@ -312,15 +295,18 @@ onDispose，当这个组件的元素被移出DOM树，就会执行此回调，�
 
 ##工作原理
 
-avalon会先将组件容器转换为一个渲染函数,传入组件VM,成一个虚拟DOM(shellRoot)
+avalon会用之前的VM来扫描组件容器的内部, 生成节点集合nodes1
 
-再将组件定义中的template转换为第二个渲染函数,传入组件VM,成一个虚拟DOM(component)
+avalon根据ms-widget配置对象与组件的defaults属性,生成新的VM,然后扫描组件的template,生成节点集合nodes2
 
-然后将shellRoot的最外层元素的所有属性合并到component的最外层的元素上.
+avalon根据soleSlot或用户在slot属性,在nodes1中查找所有插卡元素
 
-再将shellRoot中的插卡元素, 插入到component中的插槽元素的位置上.
+然后将插卡元素在nodes2中替换同名的插槽元素
 
-将component变成真实DOM,替换组件容器.
+将nodes2转换真实DOM,替换组件容器.
+
+以后组件VM的属性发生改变,或ms-widget的传参发生改变,只会对个别位置进行最小化刷新,不再重复上面步骤
+
 
 
 ##具体例子
