@@ -38,8 +38,10 @@ avalon.next 支持IE12+(edge)及chrome49, firefox49(判定标准是
 
 ##学习资料
 
-[avalon2-seed](https://github.com/PackageBox/webpack-avalon2-seed)
-这是一个avalon项目的框架，可以将它作为avalon项目的工程初始化目录配置。
+[avalon2-seed](https://github.com/RubyLouvre/avalon/tree/master/components/router)
+这是一个avalon2+mmRouter的演示项目
+
+[avalon的VM，重点学习内容](vm.md)
 
 [webpack+avalon的学习教程](http://www.cnblogs.com/sloong/p/5689135.html)
 

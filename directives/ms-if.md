@@ -13,7 +13,7 @@ var vm = avalon.define({
   toggle: false
 })
 </script>
-<p><button type="button" :click='@toggle = !@toggle'>点我</span></p>
+<p><button type="button" :click='@toggle = !@toggle'>点我</span></button></p>
 <div :if="@toggle">{{@aaa}}</div>
 </body>
 ```
