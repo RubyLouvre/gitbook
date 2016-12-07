@@ -42,6 +42,15 @@ avalon拥有两大利器，强大的组件化功能以应对**复杂墙**问题�
 
 ![](component.png)
 
+**在2.1.16后,如果你为组件容器指定了is属性,没有指定ms-widget,它会默认生成ms-widget属性**
+
+组件容器里是{% em color='red' %}不支持ms-widget之外的其他绑定属性{% endem %}
+
+```html
+<wbr :widget="{is:'ms-button'}" :attr="{title:@aaa}" />
+```
+
+上面的`:attr`属性被忽略 
 
 ##声明组件
 
@@ -61,6 +70,8 @@ avalon拥有两大利器，强大的组件化功能以应对**复杂墙**问题�
 <template is='ms-button' ></template>
 <ms-button></ms-button>
 ```
+
+
 
 自定义标签都是闭合标签,不能写成下面这样
 ```html
@@ -172,15 +183,6 @@ avalon.component('ms-view',{
 </div>
 ```
 
-我们可以对插卡元素使用除ms-if外的各种指令,如ms-for
-```html
-<xmp :widget="{is:'ms-tabs',buttons: @buttons,tabs:@tabs}">           
-<div ms-for='(index,tab) in @tabs'
-     ms-visible='index === @activeIndex '
-     slot='tabs'
-     >{{tab}}</div> 
-</xmp>
-```
 
 ##soleSlot机制
 
@@ -268,21 +270,24 @@ avalon.component('ms-pager', {
       }
   });  
 ```
+##组件的作用域
 
+2.2之前，组件的VM是会继承它上方的所有VM的属性，导致改动了某一个组件的属性后，影响到其他地方。
 
-
+2.2之后，组件的VM是完全独立，它的属性只能是defaults里面预设好的。然后我们通过ms-widget传入一个对象，对它进行赋值（defaults中没有的属性是不会赋值）
 
 
 ##生命周期
 
 avalon2组件拥有完善的生命周期钩子，方便大家做各种操作。
 
-|  | avalon2| web component | react |
+|   | avalon2| web component | react |
 | -- | -- | -- | -- |
 | 初始化 | onInit | createdCallback | getDefaultProps |
 | 插入DOM树 | onReady | attachedCallback | componentDidMount |
 | 视图变化 | onViewChange | attributeChangedCallback | componentDidUpdate |
 | 移出DOM树 | onDispose | detachedCallback | componentWillUnmount |
+
 
 
 onInit，这是组件的vm创建完毕就立即调用时，这时它对应的元素节点或虚拟DOM都不存在。只有当这个组件里面不存在子组件或子组件的构造器都加载回来，那么它才开始创建其虚拟DOM。否则原位置上被一个注释节点占着。
