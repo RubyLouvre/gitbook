@@ -215,6 +215,8 @@ avalon之所以使用Proxy, Object.defineProperty或VBScript来构造vm，那是
 
 虚拟DOM比较复杂，大家看不懂可以略过。
 
+2.2.2对VM的生成机制进行了大重构,[此文](https://segmentfault.com/a/1190000007727103)对此有详细描述,大家感兴趣可以看看
+
 
 
 

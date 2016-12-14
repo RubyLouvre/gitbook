@@ -1,6 +1,8 @@
 <!-- toc -->
 # 简介
 
+![](styles/ava/logo300x100.png)
+
 avalon2是一款基于虚拟DOM与属性劫持的 迷你、 易用、 高性能 的 前端MVVM框架， 
 拥有超优秀的兼容性, 支持移动开发, 后端渲染, WEB Component式组件开发, 无需编译, 开箱即用。
 
@@ -9,7 +11,7 @@ avalon2是一款基于虚拟DOM与属性劫持的 迷你、 易用、 高性能 
 
 ## 使用方式
 
-avalon2： https://github.com/RubyLouvre/avalon/tree/v2.2.0
+avalon2： https://github.com/RubyLouvre/avalon/tree/v2.2.2
 
 CDN: https://cdnjs.com/libraries/avalon.js 
 
@@ -38,7 +40,7 @@ avalon.next 支持IE12+(edge)及chrome49, firefox49(判定标准是
 
 ##学习资料
 
-[avalon2-seed](https://github.com/RubyLouvre/avalon/tree/master/components/router)
+[avalon2-seed](https://github.com/crazyliuzc/webpack-avalon2-SPA-seed)
 这是一个avalon2+mmRouter的演示项目
 
 [avalon的VM，重点学习内容](vm.md)
