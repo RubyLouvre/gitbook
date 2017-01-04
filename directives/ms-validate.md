@@ -25,6 +25,8 @@ vm.validate = {
     deduplicateInValidateAll: false // {Boolean} false，在validateAll回调中对reason数组根据元素节点进行去重
 }
 ```
+在一般情况下validateInBlur, validateInKeyup,validateAllInSubmit,resetInFocus都是默认的就行了。
+
 
 onError,onSuccess,onComplete, onValidateAll的第一个参数都是reasons对象,this指向被验证的元素,reason里面有你需要的各种东西.
 ```javascript
@@ -37,14 +39,15 @@ var reason = {
 }
 ```
 
-```
+```html
 <body>
 <script>
     var vm = avalon.define({
         $id: "test",
         action: '',
-        firstName: '',
-        add: function() {
+        name: '',
+        add: function(e) {
+            e.preventDefault()
             this.action = "add.php";
             this.validate.onManual();
         },
@@ -55,15 +58,15 @@ var reason = {
         validate: {
             validateAllInSubmit: false,
             onSuccess: function(reasons, event) {
-                console.info('OK')
+                console.log('成功',reasons)
             },
             onError: function(reasons, event) {
-                console.info('error')
+                console.log('有验证没有通过')
             },
             onValidateAll: function(reasons, form) {
                 if(reasons.length) {
                     // 表单有错误
-                    console.info("error");
+                    console.log("有验证没有通过",reasons);
                     return false;
                 } else {
                     // 验证成功
@@ -77,15 +80,17 @@ var reason = {
 
 <div ms-controller="test">
     <form :validate="@validate" id="f1" :attr="{ action: @action }">
-        <input type="text" placeholder="Insert your First Name" :duplex="@firstName" :rules="{ required: true }" />
-        <input type="submit" value="新建用户 action:  127.0.0.1/add" :click="@add"/>
-        <input type="submit" value="修改用户 action: 127.0.0.1/update" :click="@update"/>
+        <input type="text" placeholder="Insert your Name" :duplex="@name" :rules="{ required: true, number:true }" />
+        <input type="submit" value="新建用户" :click="@add"/>
+        <input type="submit" value="修改用户" :click="@update"/>
     </form>
 
 </div>
 </body>
 
+
 ```
 
 
 有关它的详细用法建议看[ms-rules](ms-rules.md)指令
+

@@ -89,6 +89,162 @@ VM中的数据更新，只能通过 = 赋值方式实现。但要注意在IE6-8�
 
 此外, 改变监控属性的值还会触发对应的$watch监听回调.
 
+
+##计算属性
+
+计算属性是监控属性的强化版，它**必须**依赖于1个或多个监控属性。通过普通的监控属性实现对视图的监听，它自身的变化也由监控属性进行驱动。
+
+计算属性集中定义在$computed对象中。有多种形式。
+
+```javascript
+//函数形式的只读计算属性
+avalon.define({
+    $id: 'test',
+    firstName: '333',
+    lastName: 'xxx',
+    $computed: {
+        //fullName依赖于firstName与lastName
+        fullName: function(){
+            return this.firstName+' '+this.lastName
+        },
+        //xxx只依赖于firstNaem
+        xxx: function(){
+            return this.firstName+'!!'
+        }
+    }
+})
+```
+
+```javascript
+//对象形式的可读写计算属性
+avalon.define({
+    $id: 'test',
+    firstName: '333',
+    lastName: 'xxx',
+    $computed: {
+        //fullName依赖于firstName与lastName
+        fullName: {
+            get: function(){
+                return this.firstName+' '+this.lastName
+            },
+            set: function(val){
+                var arr = val.split(' ')
+                this.firstName = arr[0]
+                this.lastName = arr[1]
+            }
+        }
+    }
+})
+```
+例子（请学完组件再看）
+
+```html
+<div ms-controller="avalon">
+        {{@test1}}
+        <table>
+            <tr>
+                <td>
+                    <ul>
+                        <li ms-for="el in @communities">{{el.community_name}}</li>
+                    </ul>
+                </td>
+                 <td>
+                   <wbr ms-widget="{is:'ms-autocomplete', $id: 'aaa', name: 'community_id', communities :@communities}" />
+
+                </td>
+            </tr>
+        </div>
+    </div>
+    <script>
+      
+        avalon.component('ms-autocomplete', {
+            template: '<div><input type="text" ms-duplex-string="@search" />' +
+                '<ul><li ms-for="($idx,opt) in @aaa">' +
+                '{{opt.community_name}}</li></ul></div>',
+            defaults: {
+                search: '',
+                communities: [],
+                onReady:function(e){
+                    e.vmodel.$watch('search', function(v){
+                        avalon.log('current search word is '+ v)
+                    })
+                },
+                $computed: {
+                    aaa: {
+                        get: function() {
+                            var ret = [];
+                            for (var i = 0; i < this.communities.length; i++) {
+                                if ((this.communities[i].community_name.indexOf(this.search) > -1)) {
+                                    ret[ret.length] = this.communities[i];
+                                    if(ret.length === 5){
+                                        break
+                                    }
+                                }
+                            }
+                            return ret;
+                        }
+                    }
+                }
+
+            }
+        });
+        communities = [{
+            community_id: 3,
+            community_name: 'This',
+        }, {
+            community_id: 5,
+            community_name: 'isnot',
+        }, {
+            community_id: 8,
+            community_name: 'agood',
+        }, {
+            community_id: 10,
+            community_name: 'example',
+        }, {
+            community_id: 22,
+            community_name: 'for',
+        }, {
+            community_id: 23,
+            community_name: 'such',
+        }, {
+            community_id: 43,
+            community_name: 'test',
+        }, {
+            community_id: 45,
+            community_name: 'thank',
+        }, {
+            community_id: 47,
+            community_name: 'you',
+        }, {
+            community_id: 50,
+            community_name: 'verymuch',
+        }, {
+            community_id: 51,
+            community_name: 'youre',
+        }, {
+            community_id: 53,
+            community_name: 'welcome',
+        }, {
+            community_id: 54,
+            community_name: 'too',
+        }, {
+            community_id: 55,
+            community_name: 'notsogood',
+        }, {
+            community_id: 56,
+            community_name: 'cheerful',
+        }];
+        var vm = avalon.define({
+            $id: 'avalon',
+            test1: 'test1',
+            communities: communities,
+        });
+    </script>
+```
+
+
+
+
 ##监控数组
 
 操作此数组的方法会同步视图的特殊数组，它是由VM中的数组自动转换而来。方便与ms-repeat, ms-each配合使用， 能批量同步一大堆DOM节点。

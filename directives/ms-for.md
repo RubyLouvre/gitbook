@@ -17,7 +17,6 @@ vm.bbb = {a: 1, b: 2, c: 3}
 ```
 
 ```html
-
 <ul>
     <li ms-for="(aaa, el) in @aaa">{{aaa}}-{{el}}</li>
 </ul
@@ -34,11 +33,34 @@ in 前面有两个变量, 它们需要放在小括号里,以逗号隔开, 那么
 > 小括号里面的变量是随便起的,主要能符合JS变量命名规范就行,当然,也不要与window, this这样变量冲突.
 
 
-```
+```html
  <li ms-for="($index, el) in @arr">{{$index}}-{{el}}</li>
  <li ms-for="($key, $val) in @obj">{{$key}}-{{$val}}</li>
 ```
 写成这样,就与avalon1.*很相像了
+
+ms-for还可以配套**data-for-rendered**回调,当列表渲染好时执行此方法
+
+```html
+<ul>
+   <li ms-for="el in @arr" data-for-rendered='@fn'>{{el}}</li>
+<ul>
+```
+
+fn为vm中的一个函数，用法与`ms-on-*`差不多，如果不传参，默认第一个参数为事件对象，类型type为`rendered`，
+target为当前循环区域的父节点，这里为｀ul`元素。并且回调中的this指向vm。
+```javascript
+{type: 'rendered', target: ULElement }
+
+```
+你也可以在回调里面传入其他东西，使用`$event`代表事件对象
+
+```html
+<ul>
+   <li ms-for="el in @arr" data-for-rendered="@fn('xxx',$event)">{{el}}</li>
+<ul>
+```
+
 
 如果你想截取数组的一部分出来单独循环,可以用limitBy过滤器, 使用as来引用新数组
 
@@ -79,7 +101,6 @@ in 前面有两个变量, 它们需要放在小括号里,以逗号隔开, 那么
 
 avalon 不需要像angular那样要求用户指定trace by或像react 那样使用key属性来提高性能,内部帮你搞定一切
 
-ms-for还可以配套data-for-rendered回调,当列表渲染好时执行此方法
 
 如果你只想循环输出数组的其中一部分,请使用filterBy,只想循环输出对象某一些键值并设置默认值,则用selectBy. 不要在同一个元素上使用ms-for与ms-if,因为这样做会在页面上生成大量的注释节点,影响页面性能
 
@@ -120,6 +141,10 @@ vm.array = [{arr: [111,222, 333]},{arr: [111,222, 333]},{arr: [111,222, 333]}]
             backgroundColor: "gray"
         }
     })
+
+   
+
+
 </script>
 ```
 

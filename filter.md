@@ -247,17 +247,21 @@ avalon.define({
 
 只能用于ms-for循环,对数组与对象都有效, 用于获取它们的某一子集, 有至少一个参数
 
-search，如果为函数时, 通过返回true决定成为子集的一部分; 如果是字符串或数字, 将转换成正则, 如果数组元素或对象键值匹配它,则成为子集的一部分,但如果是空字符串则返回原对象 ;其他情况也返回原对象。
+search，如果为函数时, 通过返回true决定成为子集的一部分; 
+如果是字符串或数字, 将转换成正则, 如果数组元素或对象键值匹配它,则成为子集的一部分,但如果是空字符串则返回原对象 ;其他情况也返回原对象。
 其他参数, 只有当search为函数时有效, 这时其参数依次是{% em color="#b20000" %}组元素或对象键值, 索引值, 多余的参数{% endem %}
 此过滤多用于自动完成的模糊匹配!
 
+![](./styles/filterBy.png)
+
+filterBy例子1
 ```html
 <script>
     avalon.define({
         $id: "filterBy",
         array: ['aaaa', 'aab', 'acb', 'ccc', 'dddd'],
         object: {a: 'aaaa', b: 'aab', c: 'acb', d: 'ccc', e: 'dddd'},
-        search: "a",
+        searchs: "a",
         searchFn: function (el, i) {
             return i > 2
         },
@@ -286,9 +290,34 @@ search，如果为函数时, 通过返回true决定成为子集的一部分; 如
     </ul>
 </div>
  
-````
+```
+filterBy例子2
 
+```html
+<body>
+    <script>
+        var vm = avalon.define({
+            $id: 'test',
+             arr: [{color: 'red'},{color:'green'},{color:'red'}],
+             fn: function(el, index, xxx){
+                 console.log(el, index, xxx)
+                 return el.color === 'red'
+             }
+        })
+    </script>
+    <style>
+       
+    </style>
+    <div ms-controller="test">
+        <ul>
+            <li ms-for="el in @arr | filterBy(@fn, 'xxx')">{{el.color}}</li>
+                
+        </ul>
+    </div>
+</body>
+```
 
+filterBy例子3
 ```html
 <script>
     var vm = avalon.define({
@@ -308,7 +337,7 @@ search，如果为函数时, 通过返回true决定成为子集的一部分; 如
     </div>	
 </div>
  
-````
+```
 
 ###selectBy
 
