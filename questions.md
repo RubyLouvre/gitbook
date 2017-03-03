@@ -1,6 +1,33 @@
 <!-- toc -->
 # 常见问题
 
+##如何兼容到IE6
+
+avalon只是提供数据绑定功能，没有JS动画，AJAX等模块。这需要其他库来提供，此外，IE的低版本不支持
+JSON，XMLHttpRequest对象，高版本不支持Promise。这需要我们额外引入其他库来支持
+
+
+首先我们需要引入IE7.js
+https://github.com/roylory/ie7-js/blob/master/lib/IE7.js
+
+然后JSON.js
+https://github.com/bestiejs/json3/tree/master/lib
+
+最后是Promise库
+
+https://github.com/RubyLouvre/avalon/blob/master/test/promise.js
+
+```html
+<script src="./pathtoie7/IE7.js"></script>
+<script src="./pathtojson/json.js"></script>
+<script src="./pathtopromise/promise.js"></script>
+<script src="./pathtoavalon2/avalon2.js"></script>
+<script src="./pathtoyourcode/main.js"></script>
+```
+当然，前4个常用的库可以打包，或者全部打包
+
+开发时，最好一边开发一边在IE8下测试（因为IE8下有开发者工具，能模拟IE6的情况），不要全部开发完再测试IE6
+
 
 ## 如何隐藏首屏加载页面时出现的花括号 ##
 `答`:在页面上添加一个样式

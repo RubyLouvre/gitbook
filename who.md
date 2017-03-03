@@ -248,5 +248,13 @@
 <!--[if lt IE 8]><span></span><![endif]--></a></li>
 <!--for631075401544-->
 
+<li><a  target="_blank" href="http://www.wanmei.com">
+<img  src="styles/logos/wanmei.png">
+<!--[if lt IE 8]><span></span><![endif]--></a></li>
+<!--for631075401544-->
+
+
 <!--ms-for-end:--></ul>
 </div>
+
+

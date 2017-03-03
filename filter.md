@@ -249,7 +249,7 @@ avalon.define({
 
 search，如果为函数时, 通过返回true决定成为子集的一部分; 
 如果是字符串或数字, 将转换成正则, 如果数组元素或对象键值匹配它,则成为子集的一部分,但如果是空字符串则返回原对象 ;其他情况也返回原对象。
-其他参数, 只有当search为函数时有效, 这时其参数依次是{% em color="#b20000" %}组元素或对象键值, 索引值, 多余的参数{% endem %}
+其他参数, 只有当search为函数时有效, 这时其参数依次是{% em color="#b20000" %}数组元素或对象键值(对象的情况下), 索引值或对象键名(对象的情况下), 多余的参数{% endem %}
 此过滤多用于自动完成的模糊匹配!
 
 ![](./styles/filterBy.png)
@@ -269,7 +269,7 @@ filterBy例子1
             return el.length === 4
         },
         searchFn3: function (el, i) {
-            return this.key === 'b' || this.key === 1
+            return i === 'b' || i === 1
         }
     })
 </script>
