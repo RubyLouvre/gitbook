@@ -213,6 +213,27 @@ setTimeout(function(){
 </html>
 ```
 
+##ajax提交出问题
+
+请确保你提交的数据是纯JS数据，而不是vm。请见[数据模型](http://avalonjs.coding.me/vm.html#数据模型)
+
+```javascript
+function submitData(){
+    var data = vm.Item.$model //如果Item是数组，在IE6－8，请改用
+    // data = vm.Item.toJSON(), 如果想提交整个vm，请改用
+    // data = vm.$model
+    $.ajax({
+          url: '../sdfwds/dsfds/dsfsd.action',
+          data:data,
+          type: 'GET',
+          success: function(){
+
+          }
+
+    })
+}
+```
+
 ## 为什么我的日期不能同步
 ```javascript
 var vm = avalon.define({

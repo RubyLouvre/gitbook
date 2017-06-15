@@ -11,7 +11,7 @@ avalon2是一款基于虚拟DOM与属性劫持的 迷你、 易用、 高性能 
 
 ## 使用方式
 
-avalon2： https://github.com/RubyLouvre/avalon/tree/v2.2.3
+avalon2： https://github.com/RubyLouvre/avalon/tree/v2.2.7
 
 CDN: https://cdnjs.com/libraries/avalon.js 
 
@@ -72,7 +72,8 @@ avalon.next 支持IE12+(edge)及chrome49, firefox49(判定标准是
 QQ学习群: 453286795 79641290(进群条件,为avalon项目加star,为avalon2开发组件)
 
 
-电子书下载：[avalon cookbook](https://github.com/RubyLouvre/avalon/raw/master/avalon%20cookbook.pdf)
+电子书下载：[avalon cookbook](https://github.com/RubyLouvre/avalon/blob/v2.2.5/avalon.cookbook.mobi)
+
 
 ##入门例子
 

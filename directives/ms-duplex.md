@@ -97,7 +97,7 @@ vm的属性值等于此控件的勾选状态,这时需要用上`ms-duplex-checke
     <script>
         avalon.define({
             $id: 'test',
-            aaa: 'bbb'
+            aaa: 'bbb',
             bbb: ['bbb','ccc'],
         })
 
@@ -374,3 +374,4 @@ vm.$watch("secondSelected", function (a) {
 
 
 这里的技巧在于使用$watch回调来同步下一级的数组与选中项。注意，使用concat方法来复制数组。
+

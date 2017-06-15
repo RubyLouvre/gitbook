@@ -260,6 +260,7 @@ xxx
 
 ![](./dom-insert.png)
 
+
 ##组件定义
 
 avalon定义组件时是使用**avalon.component**方法。
@@ -312,6 +313,34 @@ onViewChange，当这个组件或其子孙节点的某些属性值或文本内�
 
 onDispose，当这个组件的元素被移出DOM树，就会执行此回调，它会移除相应的事件，数据与vmodel。
 
+##组件间通信
+
+只要能拿到通信双方的组件实例就行，onInit, onReady的事件对象都有一个vmodel属性，就是它的实例，然后操作对方的实例属性就行了。
+
+```javascript
+var c1, c2
+avalon.component('ms-a', {
+    template: '<button type="button">A</button>',
+    defaults: {
+       onInit:function(e){
+            c1 = e.vmodel
+        },
+        buttonText: "button"
+    }
+})
+
+avalon.component('ms-b', {
+    template: '<button type="button">B</button>',
+    defaults: {
+        onInit:function(e){
+            c2 = e.vmodel
+        },
+        buttonText: "button"
+    }
+})
+
+```
+
 ##工作原理
 
 avalon会用之前的VM来扫描组件容器的内部, 生成节点集合nodes1
@@ -359,6 +388,27 @@ npm install fetch-polyfill2
 [reqwest.js](https://github.com/ded/reqwest)
 
 [ForbesLindesay/ajax](https://github.com/ForbesLindesay/ajax)
+
+##ajax提交出问题
+
+请确保你提交的数据是纯JS数据，而不是vm。请见[数据模型](http://avalonjs.coding.me/vm.html#数据模型)
+
+```javascript
+function submitData(){
+    var data = vm.Item.$model //如果Item是数组，在IE6－8，请改用
+    // data = vm.Item.toJSON(), 如果想提交整个vm，请改用
+    // data = vm.$model
+    $.ajax({
+          url: '../sdfwds/dsfds/dsfsd.action',
+          data:data,
+          type: 'GET',
+          success: function(){
+
+          }
+
+    })
+}
+```
 
 ### redux事件派发组件 
 [mmDux](https://github.com/RubyLouvre/mmDux)

@@ -37,4 +37,5 @@
    * [表单验证](duplex-validate.md)
 * [API](api.md)
 * [更新日志](log.md)
+* [友情链接](https://rubylouvre.github.io/anu/)
 
