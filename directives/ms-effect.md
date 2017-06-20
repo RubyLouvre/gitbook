@@ -134,7 +134,7 @@ onEnterDone, onLeaveDone, onEnterAbort, onLeaveAbort, onBeforeEnter, onBeforeLea
             })
             var vm = avalon.define({
                 $id: 'effect',
-                aaa: "test",
+                aaa: "effect",
                 action: 'enter',
                 enterCb: function(){
                     avalon.log('动画完成')

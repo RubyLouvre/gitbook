@@ -13,9 +13,13 @@ avalon2是一款基于虚拟DOM与属性劫持的 迷你、 易用、 高性能 
 
 avalon2： https://github.com/RubyLouvre/avalon/tree/v2.2.7
 
-CDN: https://cdnjs.com/libraries/avalon.js 
+CDN: https://unpkg.com/avalon2@2.2.8/dist/avalon.js
 
+CDN2: https://cdnjs.com/libraries/avalon.js 
 
+CDN3: https://cdn.staticfile.org/avalon.js/2.2.4/avalon.js (2.2.4)
+
+有的CDN比较旧，大家注意不要用 `avalon2.0s`这个最古老的版本
 
 ```javascript
 npm install avalon2
