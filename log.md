@@ -1,5 +1,13 @@
 # 更新日志
 
+##2.2.4
+更改下载Promise的提示
+修正IE下 orderBy BUG
+修复ms-for在循环利用对象数组的元素时,旧有元素的指令没有进行刷新的BUG
+修复effect内部传参 BUG
+重构ms-validate的绑定事件的机制
+
+
 
 ## 2.2.8
 
